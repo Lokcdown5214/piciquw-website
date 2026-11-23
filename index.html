@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>PICIQUW — Jastip & Pre-order Korea, China, Jepang, Thailand</title>
+  <meta name="description" content="Cek status batch pesanan dan bayar tagihan PICIQUW lewat QRIS atau transfer bank.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="nav.css">
+</head>
+<body>
+
+    <!-- Decorative Cute Shipping Illustrations & Polka-dot Accents Layer -->
+    <div aria-hidden="true" class="pq-deco">
+        <div class="pq-blob b1"></div>
+        <div class="pq-blob b2"></div>
+        <div class="pq-blob b3"></div>
+
+        <svg class="pq-s pq-s1" viewBox="0 0 120 120" fill="none">
+            <rect x="20" y="38" width="80" height="64" rx="16" fill="#F3E8FF" stroke="#9F67EC" stroke-width="4"/>
+            <path d="M20 56H100" stroke="#9F67EC" stroke-width="4"/>
+            <rect x="52" y="38" width="16" height="64" fill="#AEF2E1" stroke="#21B395" stroke-width="3"/>
+            <path d="M60 38C50 22 34 24 38 36C40 41 53 39 60 38Z" fill="#76E4CA" stroke="#21B395" stroke-width="3"/>
+            <path d="M60 38C70 22 86 24 82 36C80 41 67 39 60 38Z" fill="#76E4CA" stroke="#21B395" stroke-width="3"/>
+            <circle cx="42" cy="76" r="3" fill="#6D35B8"/>
+            <circle cx="78" cy="76" r="3" fill="#6D35B8"/>
+            <path d="M55 80Q60 85 65 80" stroke="#6D35B8" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+
+        <svg class="pq-s pq-s2" viewBox="0 0 140 120" fill="none">
+            <path d="M16 92C40 96 68 82 88 58" stroke="#9F67EC" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="6 8"/>
+            <g transform="translate(74, 18) rotate(-18)">
+                <path d="M6 26L52 12L38 46L28 33L6 26Z" fill="#D7F9F0" stroke="#21B395" stroke-width="3.5" stroke-linejoin="round"/>
+                <path d="M52 12L28 33L28 45L36 37" fill="#E5D1FF" stroke="#9F67EC" stroke-width="3" stroke-linejoin="round"/>
+            </g>
+            <circle cx="32" cy="34" r="5" fill="#D1B0FF"/>
+            <circle cx="114" cy="78" r="6" fill="#76E4CA"/>
+        </svg>
+
+        <svg class="pq-s pq-s3" viewBox="0 0 120 120" fill="none">
+            <path d="M28 44H92L98 98C99 103 95 108 90 108H30C25 108 21 103 22 98L28 44Z" fill="#D7F9F0" stroke="#21B395" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M44 44V34C44 25.1634 51.1634 18 60 18C68.8366 18 76 25.1634 76 34V44" stroke="#9F67EC" stroke-width="4.5" stroke-linecap="round"/>
+            <path d="M60 66C56 60 47 62 47 69C47 76 60 84 60 84C60 84 73 76 73 69C73 62 64 60 60 66Z" fill="#B889F8"/>
+        </svg>
+
+        <svg class="pq-s pq-s4" viewBox="0 0 130 110" fill="none">
+            <path d="M36 82H96C108 82 116 73 116 62C116 52 108 44 98 43C95 28 82 18 66 18C51 18 39 27 35 41C24 43 16 52 16 63C16 74 25 82 36 82Z" fill="#F3E8FF" stroke="#9F67EC" stroke-width="4" stroke-linejoin="round"/>
+            <circle cx="54" cy="56" r="3" fill="#6D35B8"/>
+            <circle cx="78" cy="56" r="3" fill="#6D35B8"/>
+            <path d="M62 62Q66 66 70 62" stroke="#6D35B8" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="28" cy="24" r="5" fill="#76E4CA"/>
+            <circle cx="108" cy="22" r="4" fill="#B889F8"/>
+        </svg>
+
+        <svg class="pq-s pq-s5" viewBox="0 0 100 100" fill="none">
+            <path d="M40 16L45 33L62 38L45 43L40 60L35 43L18 38L35 33L40 16Z" fill="#AEF2E1" stroke="#21B395" stroke-width="3" stroke-linejoin="round"/>
+            <circle cx="72" cy="70" r="8" fill="#E5D1FF" stroke="#9F67EC" stroke-width="3"/>
+        </svg>
+
+        <svg class="pq-s pq-s6" viewBox="0 0 100 100" fill="none">
+            <path d="M60 22L64 36L78 40L64 44L60 58L56 44L42 40L56 36L60 22Z" fill="#E5D1FF" stroke="#9F67EC" stroke-width="3" stroke-linejoin="round"/>
+            <circle cx="28" cy="68" r="9" fill="#D7F9F0" stroke="#21B395" stroke-width="3"/>
+        </svg>
+    </div>
+
+    <!-- Navigasi PICIQUW -->
+    <nav class="pq-nav" aria-label="Menu utama">
+        <div class="pq-nav-bar">
+            <a class="pq-nav-brand" href="index.html">PICIQUW</a>
+            <div class="pq-nav-links">
+            <a href="index.html" class="active">Beranda</a>
+            <a href="tracker.html">Tracker</a>
+            <a href="payment.html">Payment</a>
+            </div>
+        </div>
+    </nav>
+
+<header class="hero">
+    <div class="wrap hero-grid">
+      <div>
+        <span class="eyebrow"><span class="dot"></span> Jastip &amp; pre-order luar negeri</span>
+        <h1>PICIQUW</h1>
+        <p class="lead">Titip belanja dari Korea, China, Jepang, dan Thailand. Pantau paketmu sampai Indonesia dan bayar tagihan di satu tempat.</p>
+        <div class="flags" id="flags">
+          <span class="flag-chip"><img src="https://flagcdn.com/w40/kr.png" alt=""> Korea <small data-count="KR"></small></span>
+          <span class="flag-chip"><img src="https://flagcdn.com/w40/cn.png" alt=""> China <small data-count="CH"></small></span>
+          <span class="flag-chip"><img src="https://flagcdn.com/w40/jp.png" alt=""> Jepang <small data-count="JP"></small></span>
+          <span class="flag-chip"><img src="https://flagcdn.com/w40/th.png" alt=""> Thailand <small data-count="THAI"></small></span>
+        </div>
+      </div>
+
+      <div class="doors">
+        <a class="door track" href="tracker.html">
+          <span class="ic"><i data-lucide="package-search"></i></span>
+          <span>
+            <h2>Piciquw Tracker</h2>
+            <p>Cek batch pesananmu sudah sampai tahap mana: PO, shipping, gudang luar, atau OTW Indonesia.</p>
+          </span>
+          <i class="go" data-lucide="chevron-right"></i>
+        </a>
+        <a class="door pay" href="payment.html">
+          <span class="ic"><i data-lucide="wallet"></i></span>
+          <span>
+            <h2>Piciquw Payment</h2>
+            <p>Masukkan kode pembayaran dari admin, lalu bayar pakai QRIS atau transfer bank.</p>
+          </span>
+          <i class="go" data-lucide="chevron-right"></i>
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <section class="section">
+    <div class="wrap">
+      <div class="section-head">
+        <h2>Paketmu lewat 4 tahap sebelum sampai di tanganmu</h2>
+        <p>Status tiap batch diperbarui langsung oleh admin di halaman Tracker.</p>
+      </div>
+      <div class="journey">
+        <div><div class="num">1</div><h3>Pre-order</h3><p>PO dibuka, pesanan dikumpulkan dan dibelikan di negara asal.</p></div>
+        <div><div class="num">2</div><h3>Shipping</h3><p>Barang dikirim dari toko ke gudang luar negeri.</p></div>
+        <div><div class="num">3</div><h3>WH Luar</h3><p>Barang sudah di gudang luar dan menunggu jadwal kirim.</p></div>
+        <div><div class="num">4</div><h3>OTW INA</h3><p>Paket dalam perjalanan ke Indonesia, siap diteruskan ke alamatmu.</p></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="wrap pay-strip">
+      <div class="card">
+        <div class="section-head" style="margin-bottom:16px">
+          <h2>Bayar tanpa ribet</h2>
+          <p>Dua cara bayar, semuanya langsung ke rekening PICIQUW.</p>
+        </div>
+        <div class="pay-methods">
+          <div class="pay-method">
+            <span class="ic"><i data-lucide="qr-code"></i></span>
+            <div><h3>QRIS</h3><p>Scan dari aplikasi bank atau e-wallet apa saja: GoPay, OVO, DANA, ShopeePay, m-banking. Maksimal Rp200.000 per tagihan.</p></div>
+          </div>
+          <div class="pay-method">
+            <span class="ic"><i data-lucide="landmark"></i></span>
+            <div><h3>Transfer bank &amp; e-wallet</h3><p>SeaBank, ShopeePay, dan DANA. Nomornya tampil lengkap dan bisa disalin dengan satu ketukan.</p></div>
+          </div>
+        </div>
+      </div>
+      <div class="card">
+        <ol class="steps-list">
+          <li><span>Admin mengirimkan <b>kode pembayaran</b> lewat LINE, contohnya <b>PQ-7KX2M9</b>.</span></li>
+          <li><span>Buka <b>Piciquw Payment</b> dan masukkan kodenya. Total tagihan langsung muncul.</span></li>
+          <li><span>Bayar lewat <b>QRIS</b> atau <b>transfer</b> sesuai pilihan yang tersedia.</span></li>
+          <li><span>Tekan <b>Konfirmasi via LINE</b> dan lampirkan screenshot bukti bayar.</span></li>
+        </ol>
+        <a href="payment.html" class="btn btn-primary btn-block" style="margin-top:12px"><i data-lucide="wallet"></i> Bayar tagihan sekarang</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="section faq">
+    <div class="wrap">
+      <div class="section-head"><h2>Pertanyaan yang sering masuk</h2></div>
+      <details>
+        <summary>Bagaimana cara tahu pesananku masuk batch mana?</summary>
+        <p>Nama batch dikirim admin saat pesananmu dikonfirmasi. Cari nama batch itu di halaman Tracker untuk melihat statusnya.</p>
+      </details>
+      <details>
+        <summary>Di mana aku bisa lihat nominal tagihanku?</summary>
+        <p>Masukkan kode pembayaran dari admin di halaman Payment. Nominal tagihan dan metode bayarnya akan muncul otomatis. Bayar sesuai nominal yang tertera.</p>
+      </details>
+      <details>
+        <summary>Aku belum dapat kode pembayaran, gimana?</summary>
+        <p>Kode pembayaran dikirim admin setelah tagihanmu siap. Kalau belum menerima, hubungi admin lewat LINE.</p>
+      </details>
+      <details>
+        <summary>Kenapa QRIS tidak muncul di tagihanku?</summary>
+        <p>QRIS hanya bisa dipakai untuk tagihan sampai Rp200.000. Kalau tagihanmu lebih dari itu, bayar lewat SeaBank, ShopeePay, atau DANA.</p>
+      </details>
+      <details>
+        <summary>Kapan pembayaranku dikonfirmasi?</summary>
+        <p>Setelah kamu mengirim bukti bayar lewat LINE, admin mengecek mutasi lalu menandai tagihanmu lunas. Status lunas bisa dicek lagi dengan kode yang sama.</p>
+      </details>
+      <details>
+        <summary>Batch negara tertentu masih "Coming Soon", maksudnya?</summary>
+        <p>Batch untuk negara itu sedang disiapkan. Pantau Tracker atau tanya admin untuk jadwal open PO berikutnya.</p>
+      </details>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="wrap">
+      <span>© <span data-year></span> <strong>PICIQUW</strong>. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="#" data-line="Halo PICIQUW, saya mau tanya.">LINE Admin</a>
+        <a href="#" data-ig>Instagram</a>
+        <a href="tracker.html">Tracker</a>
+        <a href="payment.html">Payment</a>
+        <a href="admin.html" class="pill"><i data-lucide="lock"></i> Admin Access</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script src="config.js"></script>
+  <script src="common.js"></script>
+  <script>
+  /* PQ_GUARD: jalan hanya jika config.js & common.js berhasil dimuat */
+  if (window.PICIQUW && window.pqFillCommon) { (function () {
+    pqFillCommon();
+    // Tampilkan jumlah batch aktif per negara dari database tracker
+    pqFetchBatches().then((rows) => {
+      if (!rows.length) return;
+      document.querySelectorAll("[data-count]").forEach((el) => {
+        const n = rows.filter((r) => r.country === el.dataset.count).length;
+        el.textContent = n ? "· " + n + " batch" : "";
+      });
+    });
+  })(); } else { console.warn('PICIQUW: js/config.js atau js/common.js tidak termuat.'); }
+  </script>
+</body>
+</html>
