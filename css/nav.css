@@ -1,0 +1,17 @@
+/* ===== Menu navigasi PICIQUW — dipakai Beranda, Tracker, Payment ===== */
+.pq-nav{position:relative;z-index:20;width:100%;max-width:1024px;margin:0 auto;padding:20px 20px 0;box-sizing:border-box}
+@media(min-width:640px){.pq-nav{padding:24px 32px 0}}
+.pq-nav-bar{display:flex;align-items:center;justify-content:space-between;gap:8px;background:rgba(255,255,255,.95);border:2px solid #F3E8FF;border-radius:999px;padding:6px 6px 6px 18px;box-shadow:0 1px 2px rgba(0,0,0,.05);-webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px)}
+.pq-nav-brand{font-family:"Nunito",system-ui,sans-serif;font-weight:900;font-size:18px;letter-spacing:.025em;text-decoration:none;background:linear-gradient(to right,#8549D6,#A855F7,#21B395);-webkit-background-clip:text;background-clip:text;color:transparent;-webkit-text-fill-color:transparent}
+.pq-nav-links{display:flex;gap:2px}
+.pq-nav-links a{font-family:"Plus Jakarta Sans",system-ui,sans-serif;text-decoration:none;font-size:13px;font-weight:800;color:#64748B;padding:8px 14px;border-radius:999px;line-height:1.2;white-space:nowrap;transition:background .15s,color .15s}
+.pq-nav-links a:hover{background:#FAF6FF;color:#6D35B8}
+.pq-nav-links a.active{color:#fff;background:linear-gradient(to bottom right,#9F67EC,#21B395);box-shadow:0 4px 10px -2px rgba(209,176,255,.9)}
+/* Efek saat ditekan (terasa di HP) dan saat dipilih pakai keyboard */
+.pq-nav-links a,.pq-nav-brand{-webkit-tap-highlight-color:transparent;transition:background .15s,color .15s,transform .1s ease-out}
+.pq-nav-links a:active{transform:scale(.94);background:#F3E8FF;color:#6D35B8}
+.pq-nav-links a.active:active{background:linear-gradient(to bottom right,#8549D6,#159179);color:#fff}
+.pq-nav-brand:active{transform:scale(.96)}
+.pq-nav-links a:focus-visible,.pq-nav-brand:focus-visible{outline:3px solid #B889F8;outline-offset:2px}
+@media(prefers-reduced-motion:reduce){.pq-nav-links a,.pq-nav-brand{transition:none}.pq-nav-links a:active,.pq-nav-brand:active{transform:none}}
+@media(max-width:400px){.pq-nav-bar{padding-left:14px}.pq-nav-brand{font-size:16px}.pq-nav-links a{padding:7px 10px;font-size:12px}}
