@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="robots" content="noindex, nofollow">
+  <title>Kelola Tagihan — PICIQUW Admin</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nav.css">
+</head>
+<body>
+
+    <!-- Decorative Cute Shipping Illustrations & Polka-dot Accents Layer -->
+    <div aria-hidden="true" class="pq-deco">
+        <div class="pq-blob b1"></div>
+        <div class="pq-blob b2"></div>
+        <div class="pq-blob b3"></div>
+
+        <svg class="pq-s pq-s1" viewBox="0 0 120 120" fill="none">
+            <rect x="20" y="38" width="80" height="64" rx="16" fill="#F3E8FF" stroke="#9F67EC" stroke-width="4"/>
+            <path d="M20 56H100" stroke="#9F67EC" stroke-width="4"/>
+            <rect x="52" y="38" width="16" height="64" fill="#AEF2E1" stroke="#21B395" stroke-width="3"/>
+            <path d="M60 38C50 22 34 24 38 36C40 41 53 39 60 38Z" fill="#76E4CA" stroke="#21B395" stroke-width="3"/>
+            <path d="M60 38C70 22 86 24 82 36C80 41 67 39 60 38Z" fill="#76E4CA" stroke="#21B395" stroke-width="3"/>
+            <circle cx="42" cy="76" r="3" fill="#6D35B8"/>
+            <circle cx="78" cy="76" r="3" fill="#6D35B8"/>
+            <path d="M55 80Q60 85 65 80" stroke="#6D35B8" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+
+        <svg class="pq-s pq-s2" viewBox="0 0 140 120" fill="none">
+            <path d="M16 92C40 96 68 82 88 58" stroke="#9F67EC" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="6 8"/>
+            <g transform="translate(74, 18) rotate(-18)">
+                <path d="M6 26L52 12L38 46L28 33L6 26Z" fill="#D7F9F0" stroke="#21B395" stroke-width="3.5" stroke-linejoin="round"/>
+                <path d="M52 12L28 33L28 45L36 37" fill="#E5D1FF" stroke="#9F67EC" stroke-width="3" stroke-linejoin="round"/>
+            </g>
+            <circle cx="32" cy="34" r="5" fill="#D1B0FF"/>
+            <circle cx="114" cy="78" r="6" fill="#76E4CA"/>
+        </svg>
+
+        <svg class="pq-s pq-s3" viewBox="0 0 120 120" fill="none">
+            <path d="M28 44H92L98 98C99 103 95 108 90 108H30C25 108 21 103 22 98L28 44Z" fill="#D7F9F0" stroke="#21B395" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M44 44V34C44 25.1634 51.1634 18 60 18C68.8366 18 76 25.1634 76 34V44" stroke="#9F67EC" stroke-width="4.5" stroke-linecap="round"/>
+            <path d="M60 66C56 60 47 62 47 69C47 76 60 84 60 84C60 84 73 76 73 69C73 62 64 60 60 66Z" fill="#B889F8"/>
+        </svg>
+
+        <svg class="pq-s pq-s4" viewBox="0 0 130 110" fill="none">
+            <path d="M36 82H96C108 82 116 73 116 62C116 52 108 44 98 43C95 28 82 18 66 18C51 18 39 27 35 41C24 43 16 52 16 63C16 74 25 82 36 82Z" fill="#F3E8FF" stroke="#9F67EC" stroke-width="4" stroke-linejoin="round"/>
+            <circle cx="54" cy="56" r="3" fill="#6D35B8"/>
+            <circle cx="78" cy="56" r="3" fill="#6D35B8"/>
+            <path d="M62 62Q66 66 70 62" stroke="#6D35B8" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="28" cy="24" r="5" fill="#76E4CA"/>
+            <circle cx="108" cy="22" r="4" fill="#B889F8"/>
+        </svg>
+
+        <svg class="pq-s pq-s5" viewBox="0 0 100 100" fill="none">
+            <path d="M40 16L45 33L62 38L45 43L40 60L35 43L18 38L35 33L40 16Z" fill="#AEF2E1" stroke="#21B395" stroke-width="3" stroke-linejoin="round"/>
+            <circle cx="72" cy="70" r="8" fill="#E5D1FF" stroke="#9F67EC" stroke-width="3"/>
+        </svg>
+
+        <svg class="pq-s pq-s6" viewBox="0 0 100 100" fill="none">
+            <path d="M60 22L64 36L78 40L64 44L60 58L56 44L42 40L56 36L60 22Z" fill="#E5D1FF" stroke="#9F67EC" stroke-width="3" stroke-linejoin="round"/>
+            <circle cx="28" cy="68" r="9" fill="#D7F9F0" stroke="#21B395" stroke-width="3"/>
+        </svg>
+    </div>
+
+    <!-- Navigasi PICIQUW -->
+    <nav class="pq-nav" aria-label="Menu utama">
+        <div class="pq-nav-bar">
+            <a class="pq-nav-brand" href="index.html">PICIQUW</a>
+            <div class="pq-nav-links">
+            <a href="index.html">Beranda</a>
+            <a href="tracker.html">Tracker</a>
+            <a href="payment.html">Payment</a>
+            <a href="#" id="logout" hidden>Keluar</a>
+            </div>
+        </div>
+    </nav>
+
+<main class="pay-page">
+    <div class="wrap">
+      <div class="pay-title">
+        <h1>Kelola Tagihan</h1>
+        <p id="sub">Khusus admin PICIQUW. Login dengan akun admin yang sama seperti di Tracker.</p>
+      </div>
+
+      <!-- Login -->
+      <section class="card" id="login-card" style="max-width:420px;margin-top:24px">
+        <form id="login-form">
+          <div class="field"><label for="email">Email admin</label><input class="input" id="email" type="email" autocomplete="username" required></div>
+          <div class="field"><label for="pass">Password</label><input class="input" id="pass" type="password" autocomplete="current-password" required></div>
+          <button class="btn btn-primary btn-block" id="login-btn" type="submit"><i data-lucide="log-in"></i> Masuk</button>
+          <div class="msg err" id="login-err" hidden></div>
+        </form>
+      </section>
+
+      <!-- Panel admin -->
+      <div class="admin-grid" id="panel" hidden>
+        <section class="card">
+          <div class="step-label">Buat tagihan baru</div>
+          <form id="new-form">
+            <div class="field"><label for="nama">Nama customer</label><input class="input" id="nama" required placeholder="Contoh: Nadia Putri"></div>
+            <div class="field"><label for="batch">Batch</label><input class="input" id="batch" list="batch-list" placeholder="Pilih atau ketik nama batch"><datalist id="batch-list"></datalist></div>
+            <div class="field">
+              <label for="total">Total tagihan</label>
+              <div class="input-rp"><span>Rp</span><input class="input" id="total" inputmode="numeric" required placeholder="0"></div>
+            </div>
+            <div class="field"><label for="ket">Keterangan <small>(opsional)</small></label><input class="input" id="ket" placeholder="Contoh: pelunasan 2 item + ongkir"></div>
+            <div class="field">
+              <label>Bisa dibayar lewat</label>
+              <div class="checks" id="metode"></div>
+              <p class="note" id="qris-note" hidden style="margin-top:6px"></p>
+            </div>
+            <button class="btn btn-primary btn-block" id="save-btn" type="submit"><i data-lucide="plus"></i> Buat kode pembayaran</button>
+            <div class="msg err" id="save-err" hidden></div>
+          </form>
+
+          <div class="result" id="result" hidden>
+            <div class="total-label">Kode pembayaran</div>
+            <div class="big" id="r-kode"></div>
+            <div style="font-size:14px;color:var(--pq-muted);margin:4px 0 12px" id="r-info"></div>
+            <div style="display:flex;gap:8px;flex-wrap:wrap">
+              <button class="btn btn-ghost btn-sm" id="r-copy-kode" type="button"><i data-lucide="copy"></i> Salin kode</button>
+              <button class="btn btn-ghost btn-sm" id="r-copy-msg" type="button"><i data-lucide="clipboard"></i> Salin pesan</button>
+              <a class="btn btn-tosca btn-sm" id="r-send" target="_blank" rel="noopener"><i data-lucide="send"></i> Kirim via LINE</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="card">
+          <div class="step-label">Daftar tagihan <span class="sub" id="count" style="font-size:13px;color:var(--pq-muted);font-weight:700"></span></div>
+          <div class="toolbar">
+            <input class="input" id="q" placeholder="Cari kode, nama, atau batch">
+            <select class="input" id="f-status">
+              <option value="">Semua status</option>
+              <option value="BELUM BAYAR">Belum bayar</option>
+              <option value="LUNAS">Lunas</option>
+            </select>
+          </div>
+          <div class="table-wrap">
+            <table class="tbl">
+              <thead><tr><th>Kode</th><th>Customer</th><th style="text-align:right">Total</th><th>Status</th><th></th></tr></thead>
+              <tbody id="rows"><tr><td colspan="5" class="sub">Memuat...</td></tr></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script>
+  if (window.PICIQUW && window.pqFillCommon) { (function () {
+    const C = window.PICIQUW;
+    const $ = (id) => document.getElementById(id);
+    const sb = pqSupabase();
+    const payUrl = location.href.replace(/[^/]*([?#].*)?$/, "") + "payment.html";
+    let all = [];
+    let last = null;
+
+    // Pilihan metode: QRIS + semua rekening di config
+    const methodNames = ["QRIS"].concat((C.banks || []).map((b) => b.bank));
+    $("metode").innerHTML = methodNames.map((m) =>
+      `<label class="check"><input type="checkbox" value="${pqEsc(m)}" checked> ${pqEsc(m)}</label>`).join("");
+
+    function syncQris() {
+      const q = document.querySelector('#metode input[value="QRIS"]');
+      const max = Number(C.qrisMax) || 0;
+      if (!q) return;
+      const over = max > 0 && pqNumber($("total").value) > max;
+      if (over) q.checked = false;
+      else if (q.disabled) q.checked = true;
+      q.disabled = over;
+      $("qris-note").hidden = !over;
+      $("qris-note").textContent = "QRIS otomatis nonaktif karena total di atas " + pqRupiah(max) + ".";
+    }
+
+    $("total").addEventListener("input", (e) => {
+      const n = pqNumber(e.target.value);
+      e.target.value = n ? n.toLocaleString("id-ID") : "";
+      syncQris();
+    });
+
+    function show(el, text) { el.hidden = !text; el.textContent = text || ""; }
+
+    // ---------- Login ----------
+    async function refreshSession() {
+      if (!sb) { show($("login-err"), "Supabase tidak termuat. Cek koneksi internet."); return; }
+      const { data: { session } } = await sb.auth.getSession();
+      const on = Boolean(session);
+      $("login-card").hidden = on;
+      $("panel").hidden = !on;
+      $("logout").hidden = !on;
+      $("sub").textContent = on ? "Masuk sebagai " + session.user.email + "." : "Khusus admin PICIQUW. Login dengan akun admin yang sama seperti di Tracker.";
+      if (on) { loadList(); loadBatches(); }
+    }
+
+    $("login-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      show($("login-err"), "");
+      $("login-btn").disabled = true;
+      const { error } = await sb.auth.signInWithPassword({ email: $("email").value.trim(), password: $("pass").value });
+      $("login-btn").disabled = false;
+      if (error) { show($("login-err"), "Email atau password salah."); return; }
+      refreshSession();
+    });
+    $("logout").addEventListener("click", async (e) => { e.preventDefault(); await sb.auth.signOut(); refreshSession(); });
+
+    async function loadBatches() {
+      const rows = await pqFetchBatches();
+      $("batch-list").innerHTML = rows.map((r) => `<option value="${pqEsc(r.name)}">`).join("");
+    }
+
+    // ---------- Buat tagihan ----------
+    function customerMessage(t) {
+      return `Halo ${t.nama}, ini tagihan PICIQUW kamu${t.batch ? " untuk " + t.batch : ""} sebesar ${pqRupiah(t.total)}.\n\n` +
+        `Kode pembayaran: ${t.kode}\n\nBayar di link ini ya:\n${payUrl}?kode=${encodeURIComponent(t.kode)}\n\n` +
+        `Setelah bayar, tekan tombol "Konfirmasi via LINE" di halaman tersebut. Terima kasih!`;
+    }
+
+    $("new-form").addEventListener("submit", async (e) => {
+      e.preventDefault();
+      show($("save-err"), "");
+      const total = pqNumber($("total").value);
+      const metode = Array.from(document.querySelectorAll("#metode input:checked")).map((i) => i.value);
+      if (!total) return show($("save-err"), "Isi total tagihan.");
+      if (!metode.length) return show($("save-err"), "Pilih minimal satu metode pembayaran.");
+
+      const base = {
+        nama: $("nama").value.trim(),
+        batch: $("batch").value.trim() || null,
+        keterangan: $("ket").value.trim() || null,
+        total, metode,
+      };
+      $("save-btn").disabled = true;
+      let saved = null, error = null;
+      for (let i = 0; i < 4 && !saved; i++) {          // coba ulang kalau kode kebetulan sudah dipakai
+        const res = await sb.from("tagihan").insert({ ...base, kode: pqNewCode() }).select().single();
+        saved = res.data; error = res.error;
+        if (error && error.code !== "23505") break;
+      }
+      $("save-btn").disabled = false;
+      if (!saved) return show($("save-err"), "Gagal menyimpan: " + (error ? error.message : "coba lagi."));
+
+      last = saved;
+      $("result").hidden = false;
+      $("r-kode").textContent = saved.kode;
+      $("r-info").textContent = saved.nama + " · " + pqRupiah(saved.total) + " · " + saved.metode.join(", ");
+      $("r-send").href = pqLineShare(customerMessage(saved));
+      $("new-form").reset();
+      document.querySelectorAll("#metode input").forEach((i) => { i.checked = true; i.disabled = false; });
+      syncQris();
+      loadList();
+    });
+    $("r-copy-kode").onclick = () => last && pqCopy(last.kode, "Kode");
+    $("r-copy-msg").onclick = () => last && pqCopy(customerMessage(last), "Pesan");
+
+    // ---------- Daftar tagihan ----------
+    async function loadList() {
+      const { data, error } = await sb.from("tagihan").select("*").order("created_at", { ascending: false }).limit(500);
+      if (error) {
+        $("rows").innerHTML = `<tr><td colspan="5" class="sub">Gagal memuat. Sudah menjalankan file supabase-tagihan.sql di Supabase? (${pqEsc(error.message)})</td></tr>`;
+        return;
+      }
+      all = data || [];
+      renderList();
+    }
+
+    function renderList() {
+      const q = $("q").value.trim().toLowerCase();
+      const st = $("f-status").value;
+      const list = all.filter((t) =>
+        (!st || t.status === st) &&
+        (!q || [t.kode, t.nama, t.batch].some((v) => String(v || "").toLowerCase().includes(q))));
+      $("count").textContent = "(" + list.length + ")";
+      if (!list.length) { $("rows").innerHTML = '<tr><td colspan="5" class="sub">Belum ada tagihan.</td></tr>'; return; }
+      $("rows").innerHTML = list.map((t) => `
+        <tr data-id="${t.id}">
+          <td class="kode">${pqEsc(t.kode)}</td>
+          <td>${pqEsc(t.nama)}<div class="sub">${pqEsc(t.batch || "")}${t.keterangan ? " · " + pqEsc(t.keterangan) : ""}</div></td>
+          <td class="num">${pqRupiah(t.total)}</td>
+          <td><select class="status-sel" data-act="status">
+                <option ${t.status === "BELUM BAYAR" ? "selected" : ""}>BELUM BAYAR</option>
+                <option ${t.status === "LUNAS" ? "selected" : ""}>LUNAS</option>
+              </select></td>
+          <td><div class="acts">
+                <button class="icon-btn" data-act="copy" title="Salin pesan untuk customer"><i data-lucide="clipboard"></i></button>
+                <button class="icon-btn danger" data-act="del" title="Hapus"><i data-lucide="trash-2"></i></button>
+              </div></td>
+        </tr>`).join("");
+      if (window.lucide) lucide.createIcons();
+    }
+
+    $("q").addEventListener("input", renderList);
+    $("f-status").addEventListener("change", renderList);
+
+    $("rows").addEventListener("click", async (e) => {
+      const btn = e.target.closest("button[data-act]");
+      if (!btn) return;
+      const t = all.find((x) => x.id === btn.closest("tr").dataset.id);
+      if (!t) return;
+      if (btn.dataset.act === "copy") pqCopy(customerMessage(t), "Pesan");
+      if (btn.dataset.act === "del" && confirm("Hapus tagihan " + t.kode + "? Ini tidak bisa dibatalkan.")) {
+        const { error } = await sb.from("tagihan").delete().eq("id", t.id);
+        if (error) return pqToast("Gagal menghapus");
+        pqToast("Tagihan dihapus"); loadList();
+      }
+    });
+    $("rows").addEventListener("change", async (e) => {
+      if (e.target.dataset.act !== "status") return;
+      const id = e.target.closest("tr").dataset.id;
+      const { error } = await sb.from("tagihan").update({ status: e.target.value, updated_at: new Date().toISOString() }).eq("id", id);
+      if (error) { pqToast("Gagal mengubah status"); return loadList(); }
+      pqToast("Status: " + e.target.value);
+      const t = all.find((x) => x.id === id); if (t) t.status = e.target.value;
+    });
+
+    refreshSession();
+    pqFillCommon();
+  })(); } else { console.warn("PICIQUW: js/config.js atau js/common.js tidak termuat."); }
+  </script>
+</body>
+</html>

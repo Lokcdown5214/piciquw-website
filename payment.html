@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Piciquw Payment — Bayar Tagihan PICIQUW</title>
+  <meta name="description" content="Masukkan kode pembayaran PICIQUW untuk melihat tagihan dan cara bayarnya.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/nav.css">
+</head>
+<body>
+
+    <!-- Decorative Cute Shipping Illustrations & Polka-dot Accents Layer -->
+    <div aria-hidden="true" class="pq-deco">
+        <div class="pq-blob b1"></div>
+        <div class="pq-blob b2"></div>
+        <div class="pq-blob b3"></div>
+
+        <svg class="pq-s pq-s1" viewBox="0 0 120 120" fill="none">
+            <rect x="20" y="38" width="80" height="64" rx="16" fill="#F3E8FF" stroke="#9F67EC" stroke-width="4"/>
+            <path d="M20 56H100" stroke="#9F67EC" stroke-width="4"/>
+            <rect x="52" y="38" width="16" height="64" fill="#AEF2E1" stroke="#21B395" stroke-width="3"/>
+            <path d="M60 38C50 22 34 24 38 36C40 41 53 39 60 38Z" fill="#76E4CA" stroke="#21B395" stroke-width="3"/>
+            <path d="M60 38C70 22 86 24 82 36C80 41 67 39 60 38Z" fill="#76E4CA" stroke="#21B395" stroke-width="3"/>
+            <circle cx="42" cy="76" r="3" fill="#6D35B8"/>
+            <circle cx="78" cy="76" r="3" fill="#6D35B8"/>
+            <path d="M55 80Q60 85 65 80" stroke="#6D35B8" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+
+        <svg class="pq-s pq-s2" viewBox="0 0 140 120" fill="none">
+            <path d="M16 92C40 96 68 82 88 58" stroke="#9F67EC" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="6 8"/>
+            <g transform="translate(74, 18) rotate(-18)">
+                <path d="M6 26L52 12L38 46L28 33L6 26Z" fill="#D7F9F0" stroke="#21B395" stroke-width="3.5" stroke-linejoin="round"/>
+                <path d="M52 12L28 33L28 45L36 37" fill="#E5D1FF" stroke="#9F67EC" stroke-width="3" stroke-linejoin="round"/>
+            </g>
+            <circle cx="32" cy="34" r="5" fill="#D1B0FF"/>
+            <circle cx="114" cy="78" r="6" fill="#76E4CA"/>
+        </svg>
+
+        <svg class="pq-s pq-s3" viewBox="0 0 120 120" fill="none">
+            <path d="M28 44H92L98 98C99 103 95 108 90 108H30C25 108 21 103 22 98L28 44Z" fill="#D7F9F0" stroke="#21B395" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M44 44V34C44 25.1634 51.1634 18 60 18C68.8366 18 76 25.1634 76 34V44" stroke="#9F67EC" stroke-width="4.5" stroke-linecap="round"/>
+            <path d="M60 66C56 60 47 62 47 69C47 76 60 84 60 84C60 84 73 76 73 69C73 62 64 60 60 66Z" fill="#B889F8"/>
+        </svg>
+
+        <svg class="pq-s pq-s4" viewBox="0 0 130 110" fill="none">
+            <path d="M36 82H96C108 82 116 73 116 62C116 52 108 44 98 43C95 28 82 18 66 18C51 18 39 27 35 41C24 43 16 52 16 63C16 74 25 82 36 82Z" fill="#F3E8FF" stroke="#9F67EC" stroke-width="4" stroke-linejoin="round"/>
+            <circle cx="54" cy="56" r="3" fill="#6D35B8"/>
+            <circle cx="78" cy="56" r="3" fill="#6D35B8"/>
+            <path d="M62 62Q66 66 70 62" stroke="#6D35B8" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="28" cy="24" r="5" fill="#76E4CA"/>
+            <circle cx="108" cy="22" r="4" fill="#B889F8"/>
+        </svg>
+
+        <svg class="pq-s pq-s5" viewBox="0 0 100 100" fill="none">
+            <path d="M40 16L45 33L62 38L45 43L40 60L35 43L18 38L35 33L40 16Z" fill="#AEF2E1" stroke="#21B395" stroke-width="3" stroke-linejoin="round"/>
+            <circle cx="72" cy="70" r="8" fill="#E5D1FF" stroke="#9F67EC" stroke-width="3"/>
+        </svg>
+
+        <svg class="pq-s pq-s6" viewBox="0 0 100 100" fill="none">
+            <path d="M60 22L64 36L78 40L64 44L60 58L56 44L42 40L56 36L60 22Z" fill="#E5D1FF" stroke="#9F67EC" stroke-width="3" stroke-linejoin="round"/>
+            <circle cx="28" cy="68" r="9" fill="#D7F9F0" stroke="#21B395" stroke-width="3"/>
+        </svg>
+    </div>
+
+    <!-- Navigasi PICIQUW -->
+    <nav class="pq-nav" aria-label="Menu utama">
+        <div class="pq-nav-bar">
+            <a class="pq-nav-brand" href="index.html">PICIQUW</a>
+            <div class="pq-nav-links">
+            <a href="index.html">Beranda</a>
+            <a href="tracker.html">Tracker</a>
+            <a href="payment.html" class="active">Payment</a>
+            </div>
+        </div>
+    </nav>
+
+<main class="pay-page">
+    <div class="wrap">
+      <div class="pay-title">
+        <h1>Piciquw Payment</h1>
+        <p>Masukkan kode pembayaran dari admin. Total tagihan dan cara bayarnya akan langsung muncul.</p>
+      </div>
+
+      <!-- Langkah 1: input kode -->
+      <section class="card code-card" style="margin-top:24px">
+        <div class="step-label"><span class="n">1</span> Kode pembayaran</div>
+        <form class="code-form" id="code-form" autocomplete="off">
+          <input class="code-input" id="kode" placeholder="PQ-XXXXXX" maxlength="20" aria-label="Kode pembayaran" spellcheck="false">
+          <button class="btn btn-primary" id="cek-btn" type="submit"><i data-lucide="search"></i> Cek tagihan</button>
+        </form>
+        <div id="msg" class="msg" hidden></div>
+      </section>
+
+      <!-- Tagihan sudah lunas -->
+      <section class="card paid-box" id="paid" hidden style="margin-top:20px;max-width:560px">
+        <div class="ic"><i data-lucide="badge-check"></i></div>
+        <h2>Tagihan ini sudah lunas</h2>
+        <p id="paid-text"></p>
+      </section>
+
+      <!-- Langkah 2 & 3: rincian & bayar -->
+      <div class="pay-layout" id="bill" hidden>
+        <div class="stack">
+          <section class="card">
+            <div class="bill-head">
+              <div class="step-label" style="margin:0"><span class="n">2</span> Rincian tagihan</div>
+              <span class="badge unpaid">Belum dibayar</span>
+            </div>
+            <div class="bill-rows">
+              <div><span>Kode</span><span class="bill-code" id="b-kode"></span></div>
+              <div><span>Nama</span><span id="b-nama"></span></div>
+              <div id="b-batch-row"><span>Batch</span><span id="b-batch"></span></div>
+              <div id="b-ket-row"><span>Keterangan</span><span id="b-ket"></span></div>
+            </div>
+          </section>
+
+          <section class="card">
+            <div class="step-label"><span class="n">3</span> Bayar lewat</div>
+            <div class="msg info" id="qris-limit" hidden style="margin:0 0 14px"></div>
+            <div class="tabs" id="tabs" role="tablist"></div>
+
+            <div id="pane-qris" hidden>
+              <div class="qris-box">
+                <img class="qris-img" id="qris-img" alt="QRIS PICIQUW" title="Ketuk untuk memperbesar">
+                <div>
+                  <ol class="how">
+                    <li>Buka aplikasi m-banking atau e-wallet (GoPay, OVO, DANA, ShopeePay, dll).</li>
+                    <li>Pilih menu <b>Scan / Bayar QRIS</b>, lalu scan kode di samping.</li>
+                    <li>Masukkan nominal <b class="amt"></b>.</li>
+                    <li>Pastikan nama merchant benar, bayar, lalu simpan screenshot bukti bayar.</li>
+                  </ol>
+                  <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:16px">
+                    <a class="btn btn-ghost" id="qris-download" download="QRIS-PICIQUW.png"><i data-lucide="download"></i> Simpan QRIS</a>
+                    <button class="btn btn-ghost copy-amount" type="button"><i data-lucide="copy"></i> Salin nominal</button>
+                  </div>
+                  <p class="note" id="qris-max-note"></p>
+                  <p class="note">Bayar dari HP yang sama? Simpan gambar QRIS, lalu pilih "upload dari galeri" di aplikasi pembayaranmu.</p>
+                </div>
+              </div>
+            </div>
+
+            <div id="pane-transfer" hidden>
+              <div class="bank-list" id="bank-list"></div>
+              <div style="display:flex;gap:10px;flex-wrap:wrap;margin-top:14px">
+                <button class="btn btn-ghost copy-amount" type="button"><i data-lucide="copy"></i> Salin nominal</button>
+              </div>
+              <p class="note">Transfer tepat <b class="amt"></b>, lalu simpan screenshot bukti transfer.</p>
+            </div>
+          </section>
+        </div>
+
+        <aside class="card summary">
+          <div class="step-label"><span class="n">4</span> Konfirmasi</div>
+          <div class="total-label">Total yang harus dibayar</div>
+          <div class="total" id="s-total">Rp0</div>
+          <div class="meta">
+            <div><span>Kode</span><span id="s-kode">–</span></div>
+            <div><span>Metode</span><span id="s-method">–</span></div>
+          </div>
+          <a class="btn btn-tosca btn-block" id="line-btn" href="#"><i data-lucide="message-circle"></i> Konfirmasi via LINE</a>
+          <p class="note" id="line-note">Setelah bayar, tekan tombol di atas. Chat LINE admin terbuka dengan pesan yang sudah terisi. Lampirkan screenshot bukti bayar, lalu kirim.</p>
+        </aside>
+      </div>
+    </div>
+  </main>
+
+  <div class="modal" id="modal"><img id="modal-img" alt="QRIS PICIQUW"></div>
+
+  <footer class="footer">
+    <div class="wrap">
+      <span>© <span data-year></span> <strong>PICIQUW</strong>. All rights reserved.</span>
+      <div class="footer-links">
+        <a href="#" data-line="Halo PICIQUW, saya mau tanya soal tagihan.">LINE Admin</a>
+        <a href="#" data-ig>Instagram</a>
+        <a href="tracker.html">Tracker</a>
+        <a href="admin.html" class="pill"><i data-lucide="lock"></i> Admin Access</a>
+      </div>
+    </div>
+  </footer>
+
+  <script src="https://unpkg.com/lucide@0.460.0/dist/umd/lucide.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="js/config.js"></script>
+  <script src="js/common.js"></script>
+  <script>
+  if (window.PICIQUW && window.pqFillCommon) { (function () {
+    const C = window.PICIQUW;
+    const $ = (id) => document.getElementById(id);
+    const banks = C.banks || [];
+    const state = { bill: null, methods: [], method: null };
+
+    // Contoh tagihan untuk mencoba tampilan (hanya aktif kalau demoCode diisi di config)
+    const DEMO = C.demoCode ? {
+      kode: C.demoCode, nama: "Nadia Putri", batch: "KR Batch 12", keterangan: "Pelunasan 2 item + ongkir",
+      total: 150000, metode: ["QRIS"].concat(banks.map((b) => b.bank)), status: "BELUM BAYAR",
+    } : null;
+    const DEMO2 = DEMO ? Object.assign({}, DEMO, { kode: DEMO.kode + "2", total: 287500 }) : null;
+
+    $("qris-img").src = C.qrisImage;
+    $("qris-max-note").textContent = Number(C.qrisMax) ? "QRIS maksimal " + pqRupiah(C.qrisMax) + " per tagihan." : "";
+    $("modal-img").src = C.qrisImage;
+    $("qris-download").href = C.qrisImage;
+    $("qris-img").onclick = () => $("modal").classList.add("open");
+    $("modal").onclick = () => $("modal").classList.remove("open");
+
+    function showMsg(text, type) {
+      $("msg").hidden = !text;
+      $("msg").className = "msg " + (type || "err");
+      $("msg").textContent = text || "";
+    }
+
+    function setLoading(on) {
+      $("cek-btn").disabled = on;
+      $("cek-btn").innerHTML = on ? '<span class="spin"></span> Mengecek...' : '<i data-lucide="search"></i> Cek tagihan';
+      if (!on && window.lucide) lucide.createIcons();
+    }
+
+    async function lookup(kode) {
+      if (DEMO && kode.toUpperCase() === DEMO.kode.toUpperCase()) return DEMO;
+      if (DEMO2 && kode.toUpperCase() === DEMO2.kode.toUpperCase()) return DEMO2;
+      const sb = pqSupabase();
+      if (!sb) throw new Error("Koneksi ke server belum siap. Coba muat ulang halaman.");
+      const { data, error } = await sb.rpc("cek_tagihan", { p_kode: kode });
+      if (error) throw new Error("Gagal mengecek tagihan. Coba lagi sebentar lagi.");
+      return Array.isArray(data) ? data[0] : data;
+    }
+
+    async function cek(raw) {
+      const kode = String(raw || "").trim().toUpperCase();
+      $("bill").hidden = true; $("paid").hidden = true;
+      if (!kode) { showMsg("Masukkan kode pembayaran dulu."); return; }
+      showMsg(""); setLoading(true);
+      try {
+        const bill = await lookup(kode);
+        if (!bill) { showMsg("Kode " + kode + " tidak ditemukan. Cek lagi penulisannya atau tanya admin."); return; }
+        history.replaceState(null, "", "?kode=" + encodeURIComponent(bill.kode));
+        render(bill);
+      } catch (e) {
+        showMsg(e.message);
+      } finally {
+        setLoading(false);
+      }
+    }
+
+    function render(bill) {
+      state.bill = bill;
+
+      if (bill.status === "LUNAS") {
+        $("paid").hidden = false;
+        $("paid-text").textContent = "Tagihan " + bill.kode + " atas nama " + bill.nama + " sebesar " + pqRupiah(bill.total) + " sudah dikonfirmasi lunas. Terima kasih!";
+        return;
+      }
+
+      $("b-kode").textContent = bill.kode;
+      $("b-nama").textContent = bill.nama;
+      $("b-batch").textContent = bill.batch || "";
+      $("b-batch-row").hidden = !bill.batch;
+      $("b-ket").textContent = bill.keterangan || "";
+      $("b-ket-row").hidden = !bill.keterangan;
+      $("s-total").textContent = pqRupiah(bill.total);
+      $("s-kode").textContent = bill.kode;
+      document.querySelectorAll(".amt").forEach((el) => (el.textContent = pqRupiah(bill.total)));
+
+      // Metode yang diizinkan untuk tagihan ini
+      const allowed = (bill.metode && bill.metode.length) ? bill.metode : ["QRIS"].concat(banks.map((b) => b.bank));
+      const qrisMax = Number(C.qrisMax) || 0;
+      const qrisAllowed = allowed.some((m) => m.toUpperCase() === "QRIS");
+      const qrisOverLimit = qrisAllowed && qrisMax > 0 && Number(bill.total) > qrisMax;
+      const hasQris = qrisAllowed && !qrisOverLimit;
+      $("qris-limit").hidden = !qrisOverLimit;
+      $("qris-limit").textContent = "QRIS hanya untuk tagihan maksimal " + pqRupiah(qrisMax) + ". Tagihan ini bisa dibayar lewat transfer atau e-wallet di bawah.";
+      state.banks = banks.filter((b) => allowed.some((m) => m.toUpperCase() === b.bank.toUpperCase()));
+      state.methods = [];
+      if (hasQris) state.methods.push("qris");
+      if (state.banks.length) state.methods.push("transfer");
+      state.bankIndex = 0;
+
+      const tabs = $("tabs");
+      tabs.className = "tabs" + (state.methods.length === 1 ? " one" : "");
+      tabs.innerHTML = state.methods.map((m) => m === "qris"
+        ? '<button class="tab" role="tab" data-method="qris"><i data-lucide="qr-code"></i> QRIS</button>'
+        : '<button class="tab" role="tab" data-method="transfer"><i data-lucide="landmark"></i> Transfer' + (state.banks.length === 1 ? " " + pqEsc(state.banks[0].bank) : " / e-wallet") + "</button>"
+      ).join("");
+
+      $("bank-list").innerHTML = state.banks.map((b, i) => `
+        <label class="bank ${state.banks.length === 1 ? "single" : ""} ${i === 0 ? "selected" : ""}" data-i="${i}">
+          ${state.banks.length > 1 ? `<input type="radio" name="bank" value="${i}" ${i === 0 ? "checked" : ""}>` : ""}
+          <span>
+            <div class="name">${pqEsc(b.bank)}</div>
+            <div class="num">${pqEsc(b.number)}</div>
+            <div class="holder">a.n. ${pqEsc(b.holder)}</div>
+          </span>
+          <button type="button" class="copy" data-copy="${pqEsc(String(b.number).replace(/[^\d]/g, ""))}"><i data-lucide="copy"></i> Salin</button>
+        </label>`).join("");
+
+      $("bill").hidden = false;
+      if (!state.methods.length) {
+        $("tabs").innerHTML = "";
+        $("pane-qris").hidden = true; $("pane-transfer").hidden = true;
+        $("s-method").textContent = "Hubungi admin";
+      } else {
+        selectMethod(state.methods[0]);
+      }
+      if (window.lucide) lucide.createIcons();
+      $("bill").scrollIntoView({ behavior: "smooth", block: "start" });
+    }
+
+    function methodLabel() {
+      if (state.method === "qris") return "QRIS";
+      const b = state.banks[state.bankIndex];
+      return b ? "Transfer " + b.bank : "Transfer bank";
+    }
+
+    function selectMethod(m) {
+      state.method = m;
+      document.querySelectorAll("#tabs .tab").forEach((t) => t.classList.toggle("active", t.dataset.method === m));
+      $("pane-qris").hidden = m !== "qris";
+      $("pane-transfer").hidden = m !== "transfer";
+      updateWa();
+    }
+
+    state.msg = "";
+    const refreshLine = pqBindLine($("line-btn"), () => state.msg);
+    if (!pqIsLineOA()) $("line-note").textContent = "Setelah bayar, tekan tombol di atas. Pesan konfirmasi otomatis disalin dan profil LINE admin terbuka. Tempel pesannya di chat, lampirkan screenshot bukti bayar, lalu kirim.";
+
+    function updateWa() {
+      const b = state.bill;
+      if (!b) return;
+      $("s-method").textContent = methodLabel();
+      const lines = [
+        "Halo admin PICIQUW, saya sudah melakukan pembayaran.",
+        "",
+        "Kode: " + b.kode,
+        "Nama: " + b.nama,
+        b.batch ? "Batch: " + b.batch : null,
+        "Total: " + pqRupiah(b.total),
+        "Metode: " + methodLabel(),
+        "",
+        "Berikut saya lampirkan bukti pembayarannya. Terima kasih!",
+      ].filter((l) => l !== null);
+      state.msg = lines.join("\n");
+      refreshLine();
+    }
+
+    $("tabs").addEventListener("click", (e) => {
+      const t = e.target.closest(".tab");
+      if (t) selectMethod(t.dataset.method);
+    });
+    $("bank-list").addEventListener("click", (e) => {
+      const c = e.target.closest(".copy");
+      if (c) { e.preventDefault(); pqCopy(c.dataset.copy, "Nomor rekening"); }
+    });
+    $("bank-list").addEventListener("change", (e) => {
+      state.bankIndex = Number(e.target.value);
+      document.querySelectorAll(".bank").forEach((el) => el.classList.toggle("selected", Number(el.dataset.i) === state.bankIndex));
+      updateWa();
+    });
+    document.querySelectorAll(".copy-amount").forEach((btn) => btn.addEventListener("click", () => {
+      if (state.bill) pqCopy(String(state.bill.total), "Nominal");
+    }));
+
+    $("kode").addEventListener("input", (e) => { e.target.value = e.target.value.toUpperCase(); });
+    $("code-form").addEventListener("submit", (e) => { e.preventDefault(); cek($("kode").value); });
+
+    // Link langsung dari admin: payment.html?kode=PQ-XXXXXX
+    const fromUrl = new URLSearchParams(location.search).get("kode");
+    if (fromUrl) { $("kode").value = fromUrl.toUpperCase(); cek(fromUrl); }
+    else if (DEMO) { showMsg("Mode contoh: ketik " + DEMO.kode + " (tagihan Rp150.000) atau " + DEMO2.kode + " (Rp287.500, di atas batas QRIS).", "info"); }
+
+    pqFillCommon();
+  })(); } else { console.warn("PICIQUW: js/config.js atau js/common.js tidak termuat."); }
+  </script>
+</body>
+</html>

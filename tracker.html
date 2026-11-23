@@ -1,0 +1,1092 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PICIQUW — Batch Tracker & Public Updates</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts: Nunito & Plus Jakarta Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Nunito:wght@600;700;800;900&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <!-- Lucide Icons -->
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <!-- Supabase JS Client -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        display: ['"Nunito"', 'sans-serif'],
+                    },
+                    colors: {
+                        lilac: {
+                            50: '#FAF6FF',
+                            100: '#F3E8FF',
+                            200: '#E5D1FF',
+                            300: '#D1B0FF',
+                            400: '#B889F8',
+                            500: '#9F67EC',
+                            600: '#8549D6',
+                            700: '#6D35B8',
+                        },
+                        tosca: {
+                            50: '#EFFDF9',
+                            100: '#D7F9F0',
+                            200: '#AEF2E1',
+                            300: '#76E4CA',
+                            400: '#42CEB0',
+                            500: '#21B395',
+                            600: '#159179',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        body {
+            background-color: #FAF6FF;
+            background-image: 
+                radial-gradient(rgba(184, 137, 248, 0.34) 5px, transparent 5.5px),
+                radial-gradient(rgba(66, 206, 176, 0.36) 6px, transparent 6.5px),
+                radial-gradient(rgba(209, 176, 255, 0.25) 3px, transparent 3.5px),
+                linear-gradient(135deg, #FAF6FF 0%, #F2FBF8 50%, #F7F0FF 100%);
+            background-size: 64px 64px, 64px 64px, 32px 32px, 100% 100%;
+            background-position: 0 0, 32px 32px, 16px 16px, 0 0;
+            background-attachment: fixed;
+            line-height: 1.7;
+            letter-spacing: 0.012em;
+        }
+        ::-webkit-scrollbar { width: 8px; height: 8px; }
+        ::-webkit-scrollbar-track { background: #FAF6FF; }
+        ::-webkit-scrollbar-thumb { background: #D1B0FF; border-radius: 999px; }
+        ::-webkit-scrollbar-thumb:hover { background: #9F67EC; }
+        .clean-card {
+            background: #FFFFFF;
+            border: 2px solid rgba(229, 209, 255, 0.85);
+            box-shadow: 0 12px 32px -8px rgba(159, 103, 236, 0.10), 0 4px 12px -2px rgba(33, 179, 149, 0.06);
+        }
+        @keyframes floatSlow {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-10px) rotate(3deg); }
+        }
+        @keyframes floatReverse {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(10px) rotate(-3deg); }
+        }
+        .animate-float { animation: floatSlow 5s ease-in-out infinite; }
+        .animate-float-reverse { animation: floatReverse 6s ease-in-out infinite; }
+    </style>
+    <link rel="stylesheet" href="css/nav.css">
+</head>
+<body class="text-slate-800 antialiased min-h-screen flex flex-col selection:bg-lilac-200 selection:text-lilac-700 relative overflow-x-hidden">
+
+    <!-- Decorative Cute Shipping Illustrations & Polka-dot Accents Layer -->
+    <div aria-hidden="true" class="fixed inset-0 pointer-events-none overflow-hidden z-0 select-none">
+        <div class="absolute -top-24 -left-24 w-96 h-96 rounded-full bg-lilac-300/25 blur-3xl"></div>
+        <div class="absolute top-1/3 -right-24 w-96 h-96 rounded-full bg-tosca-300/25 blur-3xl"></div>
+        <div class="absolute -bottom-24 left-1/4 w-96 h-96 rounded-full bg-lilac-200/30 blur-3xl"></div>
+
+        <svg class="w-20 h-20 sm:w-28 sm:h-28 absolute top-8 left-4 sm:left-10 opacity-75 animate-float" viewBox="0 0 120 120" fill="none">
+            <rect x="20" y="38" width="80" height="64" rx="16" fill="#F3E8FF" stroke="#9F67EC" stroke-width="4"/>
+            <path d="M20 56H100" stroke="#9F67EC" stroke-width="4"/>
+            <rect x="52" y="38" width="16" height="64" fill="#AEF2E1" stroke="#21B395" stroke-width="3"/>
+            <path d="M60 38C50 22 34 24 38 36C40 41 53 39 60 38Z" fill="#76E4CA" stroke="#21B395" stroke-width="3"/>
+            <path d="M60 38C70 22 86 24 82 36C80 41 67 39 60 38Z" fill="#76E4CA" stroke="#21B395" stroke-width="3"/>
+            <circle cx="42" cy="76" r="3" fill="#6D35B8"/>
+            <circle cx="78" cy="76" r="3" fill="#6D35B8"/>
+            <path d="M55 80Q60 85 65 80" stroke="#6D35B8" stroke-width="3" stroke-linecap="round"/>
+        </svg>
+
+        <svg class="w-24 h-24 sm:w-32 sm:h-32 absolute top-10 right-4 sm:right-12 opacity-75 animate-float-reverse" viewBox="0 0 140 120" fill="none">
+            <path d="M16 92C40 96 68 82 88 58" stroke="#9F67EC" stroke-width="3.5" stroke-linecap="round" stroke-dasharray="6 8"/>
+            <g transform="translate(74, 18) rotate(-18)">
+                <path d="M6 26L52 12L38 46L28 33L6 26Z" fill="#D7F9F0" stroke="#21B395" stroke-width="3.5" stroke-linejoin="round"/>
+                <path d="M52 12L28 33L28 45L36 37" fill="#E5D1FF" stroke="#9F67EC" stroke-width="3" stroke-linejoin="round"/>
+            </g>
+            <circle cx="32" cy="34" r="5" fill="#D1B0FF"/>
+            <circle cx="114" cy="78" r="6" fill="#76E4CA"/>
+        </svg>
+
+        <svg class="hidden md:block w-24 h-24 absolute top-[46%] left-8 opacity-70 animate-float-reverse" viewBox="0 0 120 120" fill="none">
+            <path d="M28 44H92L98 98C99 103 95 108 90 108H30C25 108 21 103 22 98L28 44Z" fill="#D7F9F0" stroke="#21B395" stroke-width="4" stroke-linejoin="round"/>
+            <path d="M44 44V34C44 25.1634 51.1634 18 60 18C68.8366 18 76 25.1634 76 34V44" stroke="#9F67EC" stroke-width="4.5" stroke-linecap="round"/>
+            <path d="M60 66C56 60 47 62 47 69C47 76 60 84 60 84C60 84 73 76 73 69C73 62 64 60 60 66Z" fill="#B889F8"/>
+        </svg>
+
+        <svg class="hidden md:block w-28 h-28 absolute top-[52%] right-8 opacity-70 animate-float" viewBox="0 0 130 110" fill="none">
+            <path d="M36 82H96C108 82 116 73 116 62C116 52 108 44 98 43C95 28 82 18 66 18C51 18 39 27 35 41C24 43 16 52 16 63C16 74 25 82 36 82Z" fill="#F3E8FF" stroke="#9F67EC" stroke-width="4" stroke-linejoin="round"/>
+            <circle cx="54" cy="56" r="3" fill="#6D35B8"/>
+            <circle cx="78" cy="56" r="3" fill="#6D35B8"/>
+            <path d="M62 62Q66 66 70 62" stroke="#6D35B8" stroke-width="3" stroke-linecap="round"/>
+            <circle cx="28" cy="24" r="5" fill="#76E4CA"/>
+            <circle cx="108" cy="22" r="4" fill="#B889F8"/>
+        </svg>
+
+        <svg class="w-24 h-24 absolute bottom-16 left-6 opacity-70 animate-float" viewBox="0 0 100 100" fill="none">
+            <path d="M40 16L45 33L62 38L45 43L40 60L35 43L18 38L35 33L40 16Z" fill="#AEF2E1" stroke="#21B395" stroke-width="3" stroke-linejoin="round"/>
+            <circle cx="72" cy="70" r="8" fill="#E5D1FF" stroke="#9F67EC" stroke-width="3"/>
+        </svg>
+
+        <svg class="w-24 h-24 absolute bottom-16 right-6 opacity-70 animate-float-reverse" viewBox="0 0 100 100" fill="none">
+            <path d="M60 22L64 36L78 40L64 44L60 58L56 44L42 40L56 36L60 22Z" fill="#E5D1FF" stroke="#9F67EC" stroke-width="3" stroke-linejoin="round"/>
+            <circle cx="28" cy="68" r="9" fill="#D7F9F0" stroke="#21B395" stroke-width="3"/>
+        </svg>
+    </div>
+
+    <!-- Toast Notification Container -->
+    <div id="toast-container" class="fixed top-5 right-5 z-50 flex flex-col gap-3 max-w-xs w-full pointer-events-none"></div>
+
+    <!-- Top Admin Status Banner -->
+    <div id="admin-banner" class="hidden bg-gradient-to-r from-lilac-600 via-lilac-500 to-tosca-500 text-white px-5 py-3.5 shadow-md sticky top-0 z-40">
+        <div class="max-w-5xl mx-auto flex flex-wrap items-center justify-between gap-3 text-sm">
+            <div class="flex items-center gap-2.5 font-bold tracking-wide">
+                <span class="bg-white/20 p-1.5 rounded-xl">
+                    <i data-lucide="shield-check" class="w-4 h-4"></i>
+                </span>
+                <span>Admin Mode Aktif — <span id="admin-email-label">PICIQUW Owner</span></span>
+            </div>
+            <div class="flex items-center gap-3">
+                <button onclick="openSettingsModal()" class="px-4 py-1.5 rounded-full bg-white/20 hover:bg-white/30 transition text-xs font-bold flex items-center gap-2">
+                    <i data-lucide="settings" class="w-3.5 h-3.5"></i> Status Negara
+                </button>
+                <button onclick="logoutAdmin()" class="px-4 py-1.5 rounded-full bg-white text-lilac-700 hover:bg-lilac-50 transition text-xs font-extrabold flex items-center gap-1.5 shadow-sm">
+                    <i data-lucide="log-out" class="w-3.5 h-3.5"></i> Keluar
+                </button>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Navigasi PICIQUW -->
+    <nav class="pq-nav" aria-label="Menu utama">
+        <div class="pq-nav-bar">
+            <a class="pq-nav-brand" href="index.html">PICIQUW</a>
+            <div class="pq-nav-links">
+            <a href="index.html">Beranda</a>
+            <a href="tracker.html" class="active">Tracker</a>
+            <a href="payment.html">Payment</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Container -->
+    <main class="relative z-10 flex-1 max-w-5xl w-full mx-auto px-5 sm:px-8 pt-10 pb-20">
+        <header class="text-center mb-10">
+            <div class="inline-flex items-center gap-2.5 px-5 py-2 rounded-full bg-white border-2 border-lilac-200 text-xs font-extrabold text-lilac-700 mb-4 shadow-sm tracking-wide">
+                <span class="w-2.5 h-2.5 rounded-full bg-tosca-400 animate-ping"></span>
+                <span>LIVE SHIPMENT &amp; BATCH UPDATES ✨</span>
+            </div>
+            
+            <h1 class="font-display text-4xl sm:text-6xl font-black tracking-wide bg-gradient-to-r from-lilac-600 via-purple-500 to-tosca-500 bg-clip-text text-transparent pb-2 drop-shadow-sm">
+                PICIQUW
+            </h1>
+            <p class="text-slate-600 text-base sm:text-lg max-w-lg mx-auto mt-2 font-medium leading-relaxed">
+                Cek status terkini pesanan &amp; perjalanan paket kamu dengan mudah dan nyaman 🛍️📦
+            </p>
+
+            <div class="mt-6 max-w-2xl mx-auto bg-white/95 backdrop-blur-md p-4 sm:p-5 rounded-3xl border-2 border-lilac-100 shadow-sm">
+                <p class="text-xs font-extrabold uppercase tracking-wider text-slate-400 mb-3">
+                    Alur Perjalanan Paket PICIQUW
+                </p>
+                <div class="grid grid-cols-2 sm:grid-cols-4 gap-2.5 text-xs font-bold">
+                    <div class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-2xl bg-pink-50 text-pink-700 border border-pink-100">
+                        <span>🛍️</span>
+                        <span>1. Pre-order (PO)</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-2xl bg-amber-50 text-amber-700 border border-amber-100">
+                        <span>🚚</span>
+                        <span>2. Shipping</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-2xl bg-lilac-50 text-lilac-700 border border-lilac-100">
+                        <span>🏢</span>
+                        <span>3. WH Luar</span>
+                    </div>
+                    <div class="flex items-center justify-center gap-2 py-2.5 px-3 rounded-2xl bg-tosca-50 text-tosca-700 border border-tosca-100">
+                        <span>✈️</span>
+                        <span>4. OTW INA</span>
+                    </div>
+                </div>
+            </div>
+        </header>
+
+        <!-- Country Navigation Tabs -->
+        <nav aria-label="Pilih Negara Batch" class="mb-8">
+            <div id="country-tabs" class="grid grid-cols-2 sm:grid-cols-4 gap-3.5 sm:gap-4"></div>
+        </nav>
+
+        <!-- Admin Controls -->
+        <div id="admin-controls" class="hidden mb-8 clean-card rounded-3xl p-6 border-2 border-dashed border-lilac-400">
+            <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+                <div class="space-y-1">
+                    <h2 class="font-display text-lg font-extrabold text-lilac-700 flex items-center gap-2">
+                        <i data-lucide="sparkles" class="w-5 h-5 text-tosca-500"></i>
+                        Kelola <span id="admin-current-country-label">Batch KR</span>
+                    </h2>
+                    <p class="text-sm text-slate-500">Tambah batch baru atau atur status Coming Soon negara ini.</p>
+                </div>
+                <div class="flex flex-wrap items-center gap-3">
+                    <button id="toggle-coming-soon-btn" onclick="toggleCountryComingSoon()" class="px-4 py-2.5 rounded-2xl text-xs font-bold border-2 border-slate-200 bg-white hover:bg-slate-50 text-slate-700 transition flex items-center gap-2">
+                        <i data-lucide="clock" class="w-4 h-4 text-lilac-500"></i>
+                        <span id="toggle-coming-soon-text">Set Coming Soon</span>
+                    </button>
+                    <button onclick="openBatchModal()" class="px-5 py-2.5 rounded-2xl text-xs font-extrabold bg-gradient-to-r from-lilac-500 to-tosca-500 hover:from-lilac-600 hover:to-tosca-600 text-white shadow-md shadow-lilac-200 transition flex items-center gap-2">
+                        <i data-lucide="plus-circle" class="w-4 h-4"></i>
+                        Tambah Batch Baru
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Search & Filter Bar -->
+        <div id="filter-bar" class="mb-8 bg-white/95 p-4 sm:p-5 rounded-3xl border-2 border-lilac-100 shadow-sm space-y-4">
+            <div class="relative w-full">
+                <i data-lucide="search" class="w-5 h-5 text-lilac-400 absolute left-4 top-1/2 -translate-y-1/2"></i>
+                <input 
+                    type="text" 
+                    id="search-input" 
+                    placeholder="Cari nomor batch atau catatan (misal: Batch 1, Kargo)..." 
+                    oninput="renderBatches()"
+                    class="w-full pl-12 pr-4 py-3 rounded-2xl bg-lilac-50/50 border-2 border-lilac-100 focus:border-lilac-400 focus:bg-white outline-none text-sm font-medium text-slate-700 transition"
+                >
+            </div>
+            
+            <div class="flex flex-wrap items-center gap-2">
+                <span class="text-xs font-bold text-slate-400 mr-1">Filter Status:</span>
+                <button onclick="setStatusFilter('ALL')" data-filter="ALL" class="filter-pill px-4 py-2 rounded-xl text-xs font-extrabold transition bg-lilac-500 text-white shadow-sm">
+                    Semua Batch
+                </button>
+                <button onclick="setStatusFilter('Pre-order (PO)')" data-filter="Pre-order (PO)" class="filter-pill px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-50 text-slate-600 hover:bg-pink-50 border border-slate-200">
+                    🛍️ Pre-order (PO)
+                </button>
+                <button onclick="setStatusFilter('Shipping')" data-filter="Shipping" class="filter-pill px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-50 text-slate-600 hover:bg-amber-50 border border-slate-200">
+                    🚚 Shipping
+                </button>
+                <button onclick="setStatusFilter('WH Luar')" data-filter="WH Luar" class="filter-pill px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-50 text-slate-600 hover:bg-lilac-50 border border-slate-200">
+                    🏢 WH Luar
+                </button>
+                <button onclick="setStatusFilter('OTW INA')" data-filter="OTW INA" class="filter-pill px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-50 text-slate-600 hover:bg-tosca-50 border border-slate-200">
+                    ✈️ OTW INA
+                </button>
+            </div>
+        </div>
+
+        <!-- Loading State -->
+        <div id="loading-state" class="py-20 text-center">
+            <div class="inline-block w-12 h-12 border-4 border-lilac-200 border-t-tosca-400 rounded-full animate-spin mb-4"></div>
+            <p class="text-base text-slate-600 font-semibold">Memuat data batch PICIQUW...</p>
+        </div>
+
+        <!-- Coming Soon View -->
+        <div id="coming-soon-view" class="hidden clean-card rounded-3xl p-10 sm:p-14 text-center">
+            <div class="w-24 h-24 mx-auto mb-6 rounded-3xl bg-gradient-to-br from-lilac-100 to-tosca-100 flex items-center justify-center text-5xl shadow-inner animate-float" id="cs-flag">
+                🇯🇵
+            </div>
+            <span class="inline-block px-4 py-1.5 rounded-full bg-lilac-100 text-lilac-700 text-xs font-extrabold tracking-widest uppercase mb-4">
+                Coming Soon
+            </span>
+            <h2 class="font-display text-2xl sm:text-3xl font-black text-slate-800 mb-3" id="cs-title">
+                Batch JP (Jepang) Segera Hadir!
+            </h2>
+            <p class="text-slate-600 text-sm sm:text-base max-w-md mx-auto leading-relaxed">
+                Lagi dipersiapin nih sama PICIQUW! Pantau terus update dari kami ya, nanti status pengiriman batch negara ini bakal muncul lengkap di sini ✨
+            </p>
+        </div>
+
+        <!-- Batch Cards List -->
+        <div id="batch-list" class="grid grid-cols-1 lg:grid-cols-2 gap-6"></div>
+
+        <!-- Empty State -->
+        <div id="empty-state" class="hidden clean-card rounded-3xl p-12 text-center">
+            <div class="w-20 h-20 mx-auto mb-5 rounded-3xl bg-tosca-50 text-tosca-500 flex items-center justify-center">
+                <i data-lucide="package-open" class="w-10 h-10"></i>
+            </div>
+            <h3 class="font-display text-xl font-extrabold text-slate-800">Belum Ada Data Batch</h3>
+            <p class="text-sm text-slate-500 mt-2 max-w-sm mx-auto leading-relaxed">
+                Belum ada batch yang ditambahkan atau tidak ada yang cocok dengan filter pencarianmu.
+            </p>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="relative z-10 mt-auto py-8 px-6 border-t-2 border-lilac-100 bg-white/90 backdrop-blur-md">
+        <div class="max-w-5xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-500">
+            <p class="font-medium">© <span id="year"></span> <strong class="text-lilac-600 font-extrabold">PICIQUW</strong>. All rights reserved.</p>
+            <div class="flex items-center gap-5">
+                <span class="flex items-center gap-2 text-slate-500 font-medium">
+                    <span id="sync-dot" class="w-2.5 h-2.5 rounded-full bg-tosca-400"></span>
+                    <span id="sync-label">Live Terhubung</span>
+                </span>
+                <button id="footer-admin-btn" onclick="openLoginModal()" class="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-lilac-100 hover:bg-lilac-200 text-lilac-700 font-bold transition">
+                    <i data-lucide="lock" class="w-3.5 h-3.5"></i>
+                    <span>Admin Access</span>
+                </button>
+            </div>
+        </div>
+    </footer>
+
+    <!-- ==================== MODALS ==================== -->
+
+    <!-- 1. Admin Login Modal (Email & Password Supabase Auth) -->
+    <div id="login-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-5 bg-slate-900/45 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-7 shadow-2xl border-2 border-lilac-100 transform transition-all">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-lilac-100 to-tosca-100 flex items-center justify-center text-lilac-600">
+                        <i data-lucide="key-round" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display font-extrabold text-lg text-slate-800">Admin Access</h3>
+                        <p class="text-xs text-slate-400 font-medium">Khusus Owner PICIQUW</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('login-modal')" class="p-2 rounded-xl hover:bg-slate-100 text-slate-400 transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <form onsubmit="handleAdminLogin(event)" class="space-y-4">
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-1.5">Email Admin</label>
+                    <input 
+                        type="email" 
+                        id="admin-email-input" 
+                        placeholder="admin@piciquw.com" 
+                        required
+                        class="w-full px-4 py-3 rounded-2xl bg-lilac-50/70 border-2 border-lilac-200 focus:border-lilac-500 outline-none text-sm font-bold text-slate-800"
+                    >
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-1.5">Password</label>
+                    <input 
+                        type="password" 
+                        id="admin-password-input" 
+                        placeholder="••••••••" 
+                        required
+                        class="w-full px-4 py-3 rounded-2xl bg-lilac-50/70 border-2 border-lilac-200 focus:border-lilac-500 outline-none text-sm font-bold text-slate-800"
+                    >
+                </div>
+
+                <div id="login-error" class="hidden text-xs text-rose-600 font-bold text-center bg-rose-50 py-2.5 px-3 rounded-xl border border-rose-200">
+                    Email atau password salah!
+                </div>
+
+                <button type="submit" id="login-submit-btn" class="w-full py-3.5 rounded-2xl bg-gradient-to-r from-lilac-500 to-tosca-500 hover:from-lilac-600 hover:to-tosca-600 text-white font-extrabold text-sm shadow-lg shadow-lilac-200 transition">
+                    Masuk ke Admin Mode
+                </button>
+            </form>
+        </div>
+    </div>
+
+    <!-- 2. Add / Edit Batch Modal -->
+    <div id="batch-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-5 bg-slate-900/45 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-lg w-full p-7 shadow-2xl border-2 border-lilac-100 max-h-[90vh] overflow-y-auto">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-2xl bg-gradient-to-br from-lilac-100 to-tosca-100 flex items-center justify-center text-tosca-600">
+                        <i data-lucide="package-plus" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 id="batch-modal-title" class="font-display font-extrabold text-lg text-slate-800">Tambah Batch Baru</h3>
+                        <p class="text-xs text-slate-400 font-medium">Update info status pengiriman untuk pembeli</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('batch-modal')" class="p-2 rounded-xl hover:bg-slate-100 text-slate-400 transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <form onsubmit="handleSaveBatch(event)" class="space-y-5">
+                <input type="hidden" id="edit-batch-id">
+
+                <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-2">Negara</label>
+                        <select id="batch-country" class="w-full px-4 py-3 rounded-2xl bg-lilac-50/50 border-2 border-lilac-200 focus:border-lilac-500 outline-none text-sm font-bold text-slate-700">
+                            <option value="KR">🇰🇷 Batch KR (Korea)</option>
+                            <option value="CH">🇨🇳 Batch CH (China)</option>
+                            <option value="JP">🇯🇵 Batch JP (Jepang)</option>
+                            <option value="THAI">🇹🇭 Batch THAI (Thailand)</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label class="block text-xs font-bold text-slate-600 mb-2">Nama / Nomor Batch</label>
+                        <input 
+                            type="text" 
+                            id="batch-name" 
+                            placeholder="Contoh: Batch 1" 
+                            required
+                            class="w-full px-4 py-3 rounded-2xl bg-lilac-50/50 border-2 border-lilac-200 focus:border-lilac-500 outline-none text-sm font-bold text-slate-700"
+                        >
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-2">Status Terkini (4 Tahap)</label>
+                    <div class="grid grid-cols-2 gap-3">
+                        <label class="cursor-pointer">
+                            <input type="radio" name="batch-status" value="Pre-order (PO)" class="peer sr-only" checked>
+                            <div class="p-3.5 rounded-2xl border-2 border-slate-100 bg-slate-50/60 peer-checked:border-pink-400 peer-checked:bg-pink-50 transition flex items-center gap-3">
+                                <span class="text-xl">🛍️</span>
+                                <div>
+                                    <div class="text-xs font-extrabold text-slate-800 peer-checked:text-pink-700">1. Pre-order (PO)</div>
+                                    <div class="text-[11px] text-slate-400">Open / Proses PO</div>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="batch-status" value="Shipping" class="peer sr-only">
+                            <div class="p-3.5 rounded-2xl border-2 border-slate-100 bg-slate-50/60 peer-checked:border-amber-400 peer-checked:bg-amber-50 transition flex items-center gap-3">
+                                <span class="text-xl">🚚</span>
+                                <div>
+                                    <div class="text-xs font-extrabold text-slate-800 peer-checked:text-amber-700">2. Shipping</div>
+                                    <div class="text-[11px] text-slate-400">Kirim ke WH Luar</div>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="batch-status" value="WH Luar" class="peer sr-only">
+                            <div class="p-3.5 rounded-2xl border-2 border-slate-100 bg-slate-50/60 peer-checked:border-lilac-400 peer-checked:bg-lilac-50 transition flex items-center gap-3">
+                                <span class="text-xl">🏢</span>
+                                <div>
+                                    <div class="text-xs font-extrabold text-slate-800 peer-checked:text-lilac-700">3. WH Luar</div>
+                                    <div class="text-[11px] text-slate-400">Di Gudang Luar</div>
+                                </div>
+                            </div>
+                        </label>
+                        <label class="cursor-pointer">
+                            <input type="radio" name="batch-status" value="OTW INA" class="peer sr-only">
+                            <div class="p-3.5 rounded-2xl border-2 border-slate-100 bg-slate-50/60 peer-checked:border-tosca-400 peer-checked:bg-tosca-50 transition flex items-center gap-3">
+                                <span class="text-xl">✈️</span>
+                                <div>
+                                    <div class="text-xs font-extrabold text-slate-800 peer-checked:text-tosca-700">4. OTW INA</div>
+                                    <div class="text-[11px] text-slate-400">Menuju Indonesia</div>
+                                </div>
+                            </div>
+                        </label>
+                    </div>
+                </div>
+
+                <div>
+                    <label class="block text-xs font-bold text-slate-600 mb-2">Catatan / Update Publik (Opsional)</label>
+                    <textarea 
+                        id="batch-note" 
+                        rows="3" 
+                        placeholder="Contoh: Paket sedang dalam pengiriman udara menuju Indonesia, estimasi tiba 3-5 hari..."
+                        class="w-full px-4 py-3 rounded-2xl bg-lilac-50/50 border-2 border-lilac-200 focus:border-lilac-500 outline-none text-sm text-slate-700 resize-none leading-relaxed"
+                    ></textarea>
+                </div>
+
+                <div class="flex items-center gap-3 pt-2">
+                    <button type="button" onclick="closeModal('batch-modal')" class="flex-1 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-sm transition">
+                        Batal
+                    </button>
+                    <button type="submit" class="flex-1 py-3 rounded-2xl bg-gradient-to-r from-lilac-500 to-tosca-500 hover:from-lilac-600 hover:to-tosca-600 text-white font-extrabold text-sm shadow-md shadow-lilac-200 transition">
+                        Simpan Batch
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- 3. Delete Confirmation Modal -->
+    <div id="delete-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-5 bg-slate-900/45 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-sm w-full p-7 shadow-2xl border-2 border-rose-100 text-center">
+            <div class="w-14 h-14 rounded-2xl bg-rose-50 text-rose-500 flex items-center justify-center mx-auto mb-4">
+                <i data-lucide="trash-2" class="w-7 h-7"></i>
+            </div>
+            <h3 class="font-display font-extrabold text-lg text-slate-800">Hapus Batch Ini?</h3>
+            <p class="text-sm text-slate-500 mt-2 mb-6 leading-relaxed" id="delete-modal-desc">
+                Data batch yang dihapus tidak dapat dikembalikan.
+            </p>
+            <div class="flex items-center gap-3">
+                <button onclick="closeModal('delete-modal')" class="flex-1 py-3 rounded-2xl bg-slate-100 hover:bg-slate-200 text-slate-600 font-bold text-sm transition">
+                    Batal
+                </button>
+                <button id="confirm-delete-btn" class="flex-1 py-3 rounded-2xl bg-rose-500 hover:bg-rose-600 text-white font-extrabold text-sm shadow-md shadow-rose-200 transition">
+                    Ya, Hapus
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 4. Admin Settings Modal (Country Statuses) -->
+    <div id="settings-modal" class="fixed inset-0 z-50 hidden items-center justify-center p-5 bg-slate-900/45 backdrop-blur-sm">
+        <div class="bg-white rounded-3xl max-w-md w-full p-7 shadow-2xl border-2 border-lilac-100">
+            <div class="flex items-center justify-between mb-6">
+                <div class="flex items-center gap-3">
+                    <div class="w-11 h-11 rounded-2xl bg-lilac-100 text-lilac-600 flex items-center justify-center">
+                        <i data-lucide="sliders" class="w-5 h-5"></i>
+                    </div>
+                    <div>
+                        <h3 class="font-display font-extrabold text-lg text-slate-800">Pengaturan Negara</h3>
+                        <p class="text-xs text-slate-400 font-medium">Atur menu negara Aktif / Coming Soon</p>
+                    </div>
+                </div>
+                <button onclick="closeModal('settings-modal')" class="p-2 rounded-xl hover:bg-slate-100 text-slate-400 transition">
+                    <i data-lucide="x" class="w-5 h-5"></i>
+                </button>
+            </div>
+
+            <div class="space-y-2.5" id="settings-country-list"></div>
+        </div>
+    </div>
+
+    <!-- Supabase & App Logic -->
+    <script>
+        // ====== KONFIGURASI SUPABASE PICIQUW ======
+        const SUPABASE_URL = "https://cwpyhgasbmauesacdiag.supabase.co";
+        const SUPABASE_ANON_KEY = "sb_publishable_ouDVGuaX-Ogc8zFBPXryhA_CoBNWK46";
+        // =========================================
+
+        const COUNTRIES = [
+            { code: 'KR', name: 'Batch KR', fullName: 'Korea', flag: '<img src="https://flagcdn.com/w40/kr.png" alt="KR" class="w-7 h-5 object-cover rounded shadow-sm inline-block">' },
+            { code: 'CH', name: 'Batch CH', fullName: 'China', flag: '<img src="https://flagcdn.com/w40/cn.png" alt="CN" class="w-7 h-5 object-cover rounded shadow-sm inline-block">' },
+            { code: 'JP', name: 'Batch JP', fullName: 'Jepang', flag: '<img src="https://flagcdn.com/w40/jp.png" alt="JP" class="w-7 h-5 object-cover rounded shadow-sm inline-block">' },
+            { code: 'THAI', name: 'Batch THAI', fullName: 'Thailand', flag: '<img src="https://flagcdn.com/w40/th.png" alt="TH" class="w-7 h-5 object-cover rounded shadow-sm inline-block">' }
+        ];
+
+        let state = {
+            selectedCountry: 'KR',
+            statusFilter: 'ALL',
+            user: null,
+            comingSoonMap: { KR: false, CH: false, JP: true, THAI: true },
+            batches: [],
+            isSupabaseReady: false
+        };
+
+        let sb = null;
+
+        async function initApp() {
+            document.getElementById('year').textContent = new Date().getFullYear();
+            lucide.createIcons();
+
+            if (SUPABASE_URL && !SUPABASE_URL.startsWith('ISI_') && SUPABASE_ANON_KEY && !SUPABASE_ANON_KEY.startsWith('ISI_')) {
+                sb = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+                state.isSupabaseReady = true;
+
+                // Cek sesi login admin yang tersimpan
+                const { data: { session } } = await sb.auth.getSession();
+                state.user = session?.user || null;
+
+                sb.auth.onAuthStateChange((_event, session) => {
+                    state.user = session?.user || null;
+                    renderAll();
+                });
+
+                await fetchAllData();
+                setupRealtimeSubscriptions();
+            } else {
+                document.getElementById('sync-dot').className = 'w-2.5 h-2.5 rounded-full bg-amber-400';
+                document.getElementById('sync-label').textContent = 'Belum Terhubung DB';
+                document.getElementById('loading-state').classList.add('hidden');
+                renderAll();
+            }
+        }
+
+        async function fetchAllData() {
+            if (!sb) return;
+            try {
+                const [batchesRes, settingsRes] = await Promise.all([
+                    sb.from('batches').select('*'),
+                    sb.from('country_settings').select('*')
+                ]);
+
+                if (batchesRes.data) {
+                    state.batches = batchesRes.data.sort((a, b) =>
+                        a.name.localeCompare(b.name, undefined, { numeric: true, sensitivity: 'base' })
+                    );
+                }
+                if (settingsRes.data) {
+                    settingsRes.data.forEach(row => {
+                        state.comingSoonMap[row.country] = row.coming_soon;
+                    });
+                }
+            } catch (err) {
+                console.error('Fetch error:', err);
+                showToast('Gagal memuat data dari server.', 'error');
+            } finally {
+                document.getElementById('loading-state').classList.add('hidden');
+                renderAll();
+            }
+        }
+
+        function setupRealtimeSubscriptions() {
+            if (!sb) return;
+            sb.channel('piciquw-realtime')
+                .on('postgres_changes', { event: '*', schema: 'public', table: 'batches' }, () => fetchAllData())
+                .on('postgres_changes', { event: '*', schema: 'public', table: 'country_settings' }, () => fetchAllData())
+                .subscribe();
+        }
+
+        function renderAll() {
+            renderCountryTabs();
+            renderAdminControls();
+            renderBatches();
+            lucide.createIcons();
+        }
+
+        function renderCountryTabs() {
+            const container = document.getElementById('country-tabs');
+            container.innerHTML = COUNTRIES.map(c => {
+                const isSelected = state.selectedCountry === c.code;
+                const isComingSoon = state.comingSoonMap[c.code];
+                const count = state.batches.filter(b => b.country === c.code).length;
+
+                return `
+                    <button 
+                    onclick="selectCountry('${c.code}')"
+                    class="relative group p-4 sm:p-5 rounded-3xl text-left transition-all duration-200 border-2 ${
+                        isSelected 
+                        ? 'bg-gradient-to-br from-lilac-500 to-tosca-500 text-white border-transparent shadow-lg shadow-lilac-200/90 -translate-y-0.5' 
+                        : 'bg-white hover:bg-lilac-50/50 text-slate-800 border-lilac-100 hover:border-lilac-300 shadow-sm'
+                    }"
+                >
+                    <div class="flex items-center justify-between gap-2 mb-2">
+                        <div class="font-display font-black text-base sm:text-lg leading-snug flex items-center gap-2">
+                            <span>${c.name}</span>
+                            ${c.flag}
+                        </div>
+                    </div>
+                    <div class="flex items-center justify-between gap-2 mt-1">
+                        <span class="text-xs ${isSelected ? 'text-white/90' : 'text-slate-400'} font-semibold">${c.fullName}</span>
+                        ${isComingSoon 
+                            ? `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold tracking-wide ${
+                                isSelected ? 'bg-white/25 text-white' : 'bg-lilac-100 text-lilac-700'
+                              }">Coming Soon</span>`
+                            : `<span class="px-2.5 py-0.5 rounded-full text-[11px] font-extrabold ${
+                                isSelected ? 'bg-white/25 text-white' : 'bg-tosca-50 text-tosca-700 border border-tosca-100'
+                              }">${count} Batch</span>`
+                        }
+                    </div>
+                </button>
+                `;
+            }).join('');
+        }
+
+        function renderAdminControls() {
+            const isAdmin = Boolean(state.user);
+            const banner = document.getElementById('admin-banner');
+            const controls = document.getElementById('admin-controls');
+            const footerBtn = document.getElementById('footer-admin-btn');
+
+            if (isAdmin) {
+                banner.classList.remove('hidden');
+                controls.classList.remove('hidden');
+                footerBtn.classList.add('hidden');
+                document.getElementById('admin-email-label').textContent = state.user.email || 'PICIQUW Owner';
+
+                const currentCountryObj = COUNTRIES.find(c => c.code === state.selectedCountry);
+                const isCS = state.comingSoonMap[state.selectedCountry];
+                document.getElementById('admin-current-country-label').textContent = `${currentCountryObj.name} (${currentCountryObj.fullName})`;
+                document.getElementById('toggle-coming-soon-text').textContent = isCS ? 'Aktifkan Negara Ini' : 'Set Coming Soon';
+            } else {
+                banner.classList.add('hidden');
+                controls.classList.add('hidden');
+                footerBtn.classList.remove('hidden');
+            }
+        }
+
+        function renderBatches() {
+            const isAdmin = Boolean(state.user);
+            const isCS = state.comingSoonMap[state.selectedCountry];
+            const csView = document.getElementById('coming-soon-view');
+            const filterBar = document.getElementById('filter-bar');
+            const batchList = document.getElementById('batch-list');
+            const emptyState = document.getElementById('empty-state');
+            const countryObj = COUNTRIES.find(c => c.code === state.selectedCountry);
+
+            if (isCS && !isAdmin) {
+                csView.classList.remove('hidden');
+                filterBar.classList.add('hidden');
+                batchList.classList.add('hidden');
+                emptyState.classList.add('hidden');
+
+                document.getElementById('cs-flag').innerHTML = countryObj.flag;
+                document.getElementById('cs-title').textContent = `${countryObj.name} (${countryObj.fullName}) Segera Hadir!`;
+                return;
+            }
+
+            csView.classList.add('hidden');
+            filterBar.classList.remove('hidden');
+            batchList.classList.remove('hidden');
+
+            const searchQuery = document.getElementById('search-input').value.toLowerCase().trim();
+            const filtered = state.batches.filter(b => {
+                const matchCountry = b.country === state.selectedCountry;
+                const matchStatus = state.statusFilter === 'ALL' || b.status === state.statusFilter;
+                const matchSearch = !searchQuery || 
+                    b.name.toLowerCase().includes(searchQuery) || 
+                    (b.note && b.note.toLowerCase().includes(searchQuery));
+                return matchCountry && matchStatus && matchSearch;
+            });
+
+            if (filtered.length === 0) {
+                batchList.innerHTML = '';
+                emptyState.classList.remove('hidden');
+                return;
+            }
+
+            emptyState.classList.add('hidden');
+
+            const stepsMeta = [
+                { num: 1, label: 'Pre-order', emoji: '🛍️', activeBg: 'bg-pink-500', activeText: 'text-pink-700', ring: 'ring-pink-200' },
+                { num: 2, label: 'Shipping', emoji: '🚚', activeBg: 'bg-amber-500', activeText: 'text-amber-700', ring: 'ring-amber-200' },
+                { num: 3, label: 'WH Luar', emoji: '🏢', activeBg: 'bg-lilac-500', activeText: 'text-lilac-700', ring: 'ring-lilac-200' },
+                { num: 4, label: 'OTW INA', emoji: '✈️', activeBg: 'bg-tosca-500', activeText: 'text-tosca-700', ring: 'ring-tosca-200' }
+            ];
+
+            batchList.innerHTML = filtered.map(batch => {
+                const currentStep = getStatusStep(batch.status);
+                const badgeStyle = getStatusBadgeStyle(batch.status);
+
+                return `
+                    <article class="clean-card rounded-3xl p-6 sm:p-7 transition-all duration-200 hover:-translate-y-0.5 flex flex-col justify-between gap-5">
+                        <div class="flex flex-wrap items-start justify-between gap-3">
+                            <div class="space-y-1.5">
+                                <div class="flex items-center gap-2.5">
+                                    <span class="text-xl">${countryObj.flag}</span>
+                                    <h3 class="font-display font-black text-xl text-slate-800 tracking-tight">${escapeHtml(batch.name)}</h3>
+                                </div>
+                                <p class="text-xs text-slate-400 font-medium flex items-center gap-1.5">
+                                    <i data-lucide="clock" class="w-3.5 h-3.5 text-lilac-400"></i>
+                                    <span>Diperbarui: ${escapeHtml(batch.updated_at || 'Baru saja')}</span>
+                                </p>
+                            </div>
+
+                            <span class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full text-xs font-extrabold border ${badgeStyle.classes}">
+                                <span class="w-2 h-2 rounded-full ${badgeStyle.dot}"></span>
+                                <span>${escapeHtml(batch.status)}</span>
+                            </span>
+                        </div>
+
+                        <div class="bg-slate-50/90 p-4 sm:p-5 rounded-2xl border border-slate-100">
+                            <div class="grid grid-cols-4 gap-2 sm:gap-3">
+                                ${stepsMeta.map(s => {
+                                    const isCompleted = currentStep > s.num;
+                                    const isCurrent = currentStep === s.num;
+                                    let circleClass = 'bg-slate-200 text-slate-400';
+                                    let labelClass = 'text-slate-400 font-semibold';
+                                    
+                                    if (isCompleted) {
+                                        circleClass = 'bg-tosca-400 text-white';
+                                        labelClass = 'text-slate-600 font-bold';
+                                    } else if (isCurrent) {
+                                        circleClass = `${s.activeBg} text-white ring-4 ${s.ring}`;
+                                        labelClass = `${s.activeText} font-extrabold`;
+                                    }
+
+                                    return `
+                                        <div class="flex flex-col items-center text-center gap-2">
+                                            <div class="w-9 h-9 sm:w-10 sm:h-10 rounded-2xl flex items-center justify-center text-sm font-bold transition-all ${circleClass}">
+                                                ${isCompleted ? '<i data-lucide="check" class="w-4 h-4 stroke-[3]"></i>' : `<span>${s.emoji}</span>`}
+                                            </div>
+                                            <span class="text-[11px] sm:text-xs leading-tight ${labelClass}">
+                                                ${s.label}
+                                            </span>
+                                        </div>
+                                    `;
+                                }).join('')}
+                            </div>
+                        </div>
+
+                        ${batch.note ? `
+                            <div class="text-sm text-slate-700 bg-lilac-50/60 border border-lilac-100 rounded-2xl p-4 leading-relaxed">
+                                <span class="block text-[11px] font-extrabold uppercase tracking-wider text-lilac-600 mb-1">Catatan Update:</span>
+                                ${escapeHtml(batch.note)}
+                            </div>
+                        ` : ''}
+
+                        ${isAdmin ? `
+                            <div class="pt-4 border-t border-slate-100 flex flex-wrap items-center justify-between gap-3">
+                                <div class="flex items-center gap-2">
+                                    <span class="text-xs font-bold text-slate-500">Status:</span>
+                                    <select 
+                                        onchange="quickUpdateStatus('${batch.id}', this.value)"
+                                        class="text-xs font-extrabold px-3 py-2 rounded-xl bg-lilac-50 border-2 border-lilac-200 text-lilac-700 outline-none cursor-pointer"
+                                    >
+                                        <option value="Pre-order (PO)" ${batch.status === 'Pre-order (PO)' ? 'selected' : ''}>🛍️ Pre-order (PO)</option>
+                                        <option value="Shipping" ${batch.status === 'Shipping' ? 'selected' : ''}>🚚 Shipping</option>
+                                        <option value="WH Luar" ${batch.status === 'WH Luar' ? 'selected' : ''}>🏢 WH Luar</option>
+                                        <option value="OTW INA" ${batch.status === 'OTW INA' ? 'selected' : ''}>✈️ OTW INA</option>
+                                    </select>
+                                </div>
+                                <div class="flex items-center gap-2">
+                                    <button onclick="openEditBatchModal('${batch.id}')" class="px-3 py-2 rounded-xl bg-tosca-50 hover:bg-tosca-100 text-tosca-700 text-xs font-bold transition flex items-center gap-1.5">
+                                        <i data-lucide="pencil" class="w-3.5 h-3.5"></i>
+                                        <span>Edit</span>
+                                    </button>
+                                    <button onclick="openDeleteModal('${batch.id}', '${escapeHtml(batch.name)}')" class="p-2 rounded-xl bg-rose-50 hover:bg-rose-100 text-rose-500 transition">
+                                        <i data-lucide="trash-2" class="w-4 h-4"></i>
+                                    </button>
+                                </div>
+                            </div>
+                        ` : ''}
+                    </article>
+                `;
+            }).join('');
+
+            lucide.createIcons();
+        }
+
+        function getStatusStep(status) {
+            if (status === 'Pre-order (PO)') return 1;
+            if (status === 'Shipping') return 2;
+            if (status === 'WH Luar') return 3;
+            if (status === 'OTW INA') return 4;
+            return 1;
+        }
+
+        function getStatusBadgeStyle(status) {
+            if (status === 'Pre-order (PO)') return { classes: 'bg-pink-50 text-pink-700 border-pink-200', dot: 'bg-pink-500' };
+            if (status === 'Shipping') return { classes: 'bg-amber-50 text-amber-700 border-amber-200', dot: 'bg-amber-500' };
+            if (status === 'WH Luar') return { classes: 'bg-lilac-100 text-lilac-700 border-lilac-200', dot: 'bg-lilac-500' };
+            return { classes: 'bg-tosca-100 text-tosca-700 border-tosca-200', dot: 'bg-tosca-500 animate-pulse' };
+        }
+
+        function getFormattedTimestamp() {
+            const now = new Date();
+            const months = ['Jan', 'Feb', 'Mar', 'Apr', 'Mei', 'Jun', 'Jul', 'Agu', 'Sep', 'Okt', 'Nov', 'Des'];
+            return `${now.getDate()} ${months[now.getMonth()]} ${now.getFullYear()}, ${String(now.getHours()).padStart(2, '0')}:${String(now.getMinutes()).padStart(2, '0')}`;
+        }
+
+        function escapeHtml(str) {
+            if (!str) return '';
+            return String(str).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;').replace(/'/g, '&#039;');
+        }
+
+        function showToast(message, type = 'success') {
+            const container = document.getElementById('toast-container');
+            const toast = document.createElement('div');
+            const bg = type === 'error' ? 'bg-rose-600 text-white' : 'bg-slate-800 text-white';
+            toast.className = `${bg} px-4 py-3.5 rounded-2xl shadow-xl text-xs font-bold flex items-center gap-2.5 pointer-events-auto transform transition-all duration-300`;
+            toast.innerHTML = `<span>${type === 'error' ? '⚠️' : '✨'}</span><span>${escapeHtml(message)}</span>`;
+            container.appendChild(toast);
+            setTimeout(() => {
+                toast.classList.add('opacity-0', '-translate-y-2');
+                setTimeout(() => toast.remove(), 300);
+            }, 3000);
+        }
+
+        function selectCountry(code) {
+            state.selectedCountry = code;
+            state.statusFilter = 'ALL';
+            updateFilterPillsUI();
+            renderAll();
+        }
+
+        function setStatusFilter(status) {
+            state.statusFilter = status;
+            updateFilterPillsUI();
+            renderBatches();
+        }
+
+        function updateFilterPillsUI() {
+            document.querySelectorAll('.filter-pill').forEach(btn => {
+                btn.className = btn.dataset.filter === state.statusFilter
+                    ? 'filter-pill px-4 py-2 rounded-xl text-xs font-extrabold transition bg-lilac-500 text-white shadow-sm'
+                    : 'filter-pill px-4 py-2 rounded-xl text-xs font-bold transition bg-slate-50 text-slate-600 hover:bg-lilac-50 border border-slate-200';
+            });
+        }
+
+        function openModal(id) {
+            const el = document.getElementById(id);
+            el.classList.remove('hidden');
+            el.classList.add('flex');
+        }
+
+        function closeModal(id) {
+            const el = document.getElementById(id);
+            el.classList.add('hidden');
+            el.classList.remove('flex');
+        }
+
+        // Admin Login & Logout
+        function openLoginModal() {
+            document.getElementById('admin-password-input').value = '';
+            document.getElementById('login-error').classList.add('hidden');
+            openModal('login-modal');
+            setTimeout(() => document.getElementById('admin-email-input').focus(), 100);
+        }
+
+        async function handleAdminLogin(e) {
+            e.preventDefault();
+            if (!sb) return showToast('Konfigurasi Supabase belum diisi.', 'error');
+
+            const email = document.getElementById('admin-email-input').value.trim();
+            const password = document.getElementById('admin-password-input').value;
+            const btn = document.getElementById('login-submit-btn');
+            const errBox = document.getElementById('login-error');
+
+            btn.disabled = true;
+            btn.textContent = 'Memeriksa...';
+            errBox.classList.add('hidden');
+
+            const { error } = await sb.auth.signInWithPassword({ email, password });
+
+            btn.disabled = false;
+            btn.textContent = 'Masuk ke Admin Mode';
+
+            if (error) {
+                errBox.textContent = 'Email atau password salah!';
+                errBox.classList.remove('hidden');
+            } else {
+                closeModal('login-modal');
+                showToast('Selamat datang kembali, Kak! Admin Mode aktif.');
+            }
+        }
+
+        async function logoutAdmin() {
+            if (!sb) return;
+            await sb.auth.signOut();
+            showToast('Berhasil keluar dari Admin Mode.');
+        }
+
+        // CRUD Batches
+        function openBatchModal() {
+            document.getElementById('batch-modal-title').textContent = 'Tambah Batch Baru';
+            document.getElementById('edit-batch-id').value = '';
+            document.getElementById('batch-country').value = state.selectedCountry;
+            const existingCount = state.batches.filter(b => b.country === state.selectedCountry).length;
+            document.getElementById('batch-name').value = `Batch ${existingCount + 1}`;
+            document.getElementById('batch-note').value = '';
+            document.querySelector('input[name="batch-status"][value="Pre-order (PO)"]').checked = true;
+            openModal('batch-modal');
+        }
+
+        function openEditBatchModal(id) {
+            const batch = state.batches.find(b => b.id === id);
+            if (!batch) return;
+            document.getElementById('batch-modal-title').textContent = 'Edit Info Batch';
+            document.getElementById('edit-batch-id').value = batch.id;
+            document.getElementById('batch-country').value = batch.country;
+            document.getElementById('batch-name').value = batch.name;
+            document.getElementById('batch-note').value = batch.note || '';
+            const radio = document.querySelector(`input[name="batch-status"][value="${batch.status}"]`);
+            if (radio) radio.checked = true;
+            openModal('batch-modal');
+        }
+
+        async function handleSaveBatch(e) {
+            e.preventDefault();
+            if (!state.user || !sb) return;
+
+            const id = document.getElementById('edit-batch-id').value;
+            const payload = {
+                country: document.getElementById('batch-country').value,
+                name: document.getElementById('batch-name').value.trim(),
+                status: document.querySelector('input[name="batch-status"]:checked').value,
+                note: document.getElementById('batch-note').value.trim(),
+                updated_at: getFormattedTimestamp()
+            };
+
+            closeModal('batch-modal');
+
+            const { error } = id
+                ? await sb.from('batches').update(payload).eq('id', id)
+                : await sb.from('batches').insert([payload]);
+
+            if (error) {
+                console.error(error);
+                showToast('Gagal menyimpan data batch.', 'error');
+            } else {
+                state.selectedCountry = payload.country;
+                await fetchAllData();
+                showToast(`${payload.name} berhasil disimpan!`);
+            }
+        }
+
+        async function quickUpdateStatus(id, newStatus) {
+            if (!state.user || !sb) return;
+            const { error } = await sb
+                .from('batches')
+                .update({ status: newStatus, updated_at: getFormattedTimestamp() })
+                .eq('id', id);
+
+            if (error) {
+                showToast('Gagal mengubah status.', 'error');
+            } else {
+                await fetchAllData();
+                showToast(`Status diubah ke ${newStatus}`);
+            }
+        }
+
+        let batchIdToDelete = null;
+        function openDeleteModal(id, name) {
+            batchIdToDelete = id;
+            document.getElementById('delete-modal-desc').textContent = `Apakah kamu yakin ingin menghapus "${name}"?`;
+            openModal('delete-modal');
+        }
+
+        document.getElementById('confirm-delete-btn').addEventListener('click', async () => {
+            if (!state.user || !sb || !batchIdToDelete) return;
+            const targetId = batchIdToDelete;
+            batchIdToDelete = null;
+            closeModal('delete-modal');
+
+            const { error } = await sb.from('batches').delete().eq('id', targetId);
+            if (error) {
+                showToast('Gagal menghapus batch.', 'error');
+            } else {
+                await fetchAllData();
+                showToast('Batch berhasil dihapus.');
+            }
+        });
+
+        // Settings Coming Soon
+        async function toggleCountryComingSoon(countryCode = state.selectedCountry) {
+            if (!state.user || !sb) return;
+            const nextVal = !state.comingSoonMap[countryCode];
+            const { error } = await sb
+                .from('country_settings')
+                .upsert({ country: countryCode, coming_soon: nextVal });
+
+            if (error) {
+                showToast('Gagal mengubah status negara.', 'error');
+            } else {
+                state.comingSoonMap[countryCode] = nextVal;
+                renderAll();
+                renderSettingsCountryList();
+                showToast(`Status ${countryCode} diperbarui!`);
+            }
+        }
+
+        function openSettingsModal() {
+            renderSettingsCountryList();
+            openModal('settings-modal');
+        }
+
+        function renderSettingsCountryList() {
+            const container = document.getElementById('settings-country-list');
+            container.innerHTML = COUNTRIES.map(c => {
+                const isCS = state.comingSoonMap[c.code];
+                return `
+                    <div class="flex items-center justify-between p-3 rounded-2xl bg-slate-50 border border-slate-100">
+                        <div class="flex items-center gap-2.5 text-xs font-bold text-slate-700">
+                            <span class="text-base">${c.flag}</span>
+                            <span>${c.name} (${c.fullName})</span>
+                        </div>
+                        <button 
+                            type="button"
+                            onclick="toggleCountryComingSoon('${c.code}')"
+                            class="px-3.5 py-1.5 rounded-xl text-xs font-extrabold transition ${
+                                isCS ? 'bg-lilac-100 text-lilac-700 hover:bg-lilac-200' : 'bg-tosca-100 text-tosca-700 hover:bg-tosca-200'
+                            }"
+                        >
+                            ${isCS ? 'Coming Soon' : 'Aktif'}
+                        </button>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        window.addEventListener('DOMContentLoaded', initApp);
+    </script>
+</body>
+</html>
